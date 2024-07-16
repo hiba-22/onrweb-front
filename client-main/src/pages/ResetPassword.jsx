@@ -39,7 +39,7 @@ const ResetPassword = () => {
             // posting
             try {
                 const response = await axios.post(
-                    "http://localhost:3000/api/v1/auth/reset", { password }, 
+                    "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/auth/reset", { password }, 
                 );
                     console.log(response);
                 Swal.fire({

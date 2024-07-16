@@ -25,7 +25,7 @@ const ArticleContext = ({ children }) => {
 
     useEffect(() => {
         handleArticleFetch(
-            `http://localhost:3000/api/v1/articles?page=1`
+            `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/articles?page=1`
         );
     }, []);
     const passing = {

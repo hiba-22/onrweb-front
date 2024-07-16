@@ -62,7 +62,7 @@ const AddJob = () => {
         // posting;
         try {
             const response = await axios.post(
-                "http://localhost:3000/api/v1/jobs",
+                "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/jobs",
                 newJob,
                 {
                     withCredentials: true,

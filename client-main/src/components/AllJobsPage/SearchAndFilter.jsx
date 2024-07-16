@@ -41,7 +41,7 @@ const SearchAndFilter = () => {
     };
 
     useEffect(() => {
-        const baseUrl = "http://localhost:3000/api/v1/jobs?page=1&limit=5";
+        const baseUrl = "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/jobs?page=1&limit=5";
         let url = baseUrl;
         const queryParams = {};
 

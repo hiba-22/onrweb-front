@@ -30,7 +30,7 @@ const JobCard = ({ job }) => {
       };
       try {
         const response = await postHandler({
-          url: "http://localhost:3000/api/v1/application/apply",
+          url: "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/application/apply",
           body: appliedJob,
         });
         Swal.fire({
@@ -70,7 +70,7 @@ const JobCard = ({ job }) => {
       appliedJob.append("resume", formData.get("resume"));
 
       const response = await postHandler({
-        url: "http://localhost:3000/api/v1/ApplicationGeust/applyGeust",
+        url: "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/ApplicationGeust/applyGeust",
         body: appliedJob,
         isFormData: true, // Pass this to indicate form data
       });

@@ -32,7 +32,7 @@ const Stats = () => {
         queryKey: ["stats"],
         queryFn: () =>
             getAllHandler(
-                `http://localhost:3000/api/v1/admin/stats`
+                `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/admin/stats`
             ),
     });
 

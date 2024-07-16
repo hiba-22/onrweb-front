@@ -8,7 +8,7 @@ const Landing = () => {
     const [searchQuery, setSearchQuery] = useState("");
     useEffect(() => {
         const baseUrl =
-            "http://localhost:3000/api/v1/articles?page=1&limit=6";
+            "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/articles?page=1&limit=6";
         let url = baseUrl;
         const queryParams = {};
 

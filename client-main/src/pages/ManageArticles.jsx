@@ -21,7 +21,7 @@ const ManageArticles = () => {
     queryKey: ["my-articles"],
     queryFn: () =>
       axios
-        .get(`http://localhost:3000/api/v1/articles/my-articles`, {
+        .get(`https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/articles/my-articles`, {
           withCredentials: true,
         })
         .then((response) => response.data),
@@ -45,7 +45,7 @@ const ManageArticles = () => {
 
   const deleteArticleHandler = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/v1/articles/${id}`, {
+      await axios.delete(`https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/articles/${id}`, {
         withCredentials: true,
       });
 
