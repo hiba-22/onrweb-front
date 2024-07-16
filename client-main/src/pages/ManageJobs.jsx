@@ -25,7 +25,7 @@ const ManageJobs = () => {
         queryKey: ["my-jobs"],
         queryFn: () =>
             getAllHandler(
-                `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/jobs/my-jobs`
+                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs/my-jobs`
             ),
     });
 
@@ -48,14 +48,14 @@ const ManageJobs = () => {
     const deleteJobHandler = async (id) => {
         try {
             const response = await axios.delete(
-                `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/jobs/${id}`,
+                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs/${id}`,
                 { withCredentials: true }
             );
 
             // const updateJobs = jobs?.result?.filter((job) => job._id !== id);
             // setJobs(updateJobs);
             // handleJobFetch(
-            //     `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/jobs?page=1`
+            //     `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs?page=1`
             // );
             refetch();
             Swal.fire({

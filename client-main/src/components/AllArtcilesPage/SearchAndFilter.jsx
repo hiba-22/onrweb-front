@@ -32,7 +32,7 @@ const SearchAndFilter = () => {
     };
 
     useEffect(() => {
-        const baseUrl = "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/articles?page=1&limit=6";
+        const baseUrl = "https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/articles?page=1&limit=6";
         let url = baseUrl;
         const queryParams = {};
 

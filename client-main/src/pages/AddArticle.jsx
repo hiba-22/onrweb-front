@@ -36,7 +36,7 @@ const AddArticle = () => {
 
         try {
             const response = await axios.post(
-                "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/Articles",
+                "https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/Articles",
                 formData,
                 {
                     withCredentials: true,

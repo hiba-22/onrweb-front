@@ -19,7 +19,7 @@ const Recruiter = () => {
         queryKey: ["rec-jobs"],
         queryFn: async () => {
             const response = await axios.get(
-                `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/application/recruiter-jobs`,
+                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/application/recruiter-jobs`,
                 {
                     withCredentials: true,
                 }
@@ -52,7 +52,7 @@ const Recruiter = () => {
         const newStatus = { recruiterId, status: "accepted" };
         updateJobStatusMutation.mutate({
             body: newStatus,
-            url: `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/application/${id}`,
+            url: `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/application/${id}`,
         });
     };
 
@@ -60,7 +60,7 @@ const Recruiter = () => {
         const newStatus = { recruiterId, status: "rejected" };
         updateJobStatusMutation.mutate({
             body: newStatus,
-            url: `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/application/${id}`,
+            url: `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/application/${id}`,
         });
     };
 

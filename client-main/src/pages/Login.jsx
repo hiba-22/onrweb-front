@@ -32,7 +32,7 @@ const Login = () => {
         // posting
         try {
             const response = await axios.post(
-                "https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/auth/login",
+                "https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/auth/login",
                 data,
                 {
                     withCredentials: true,
@@ -66,7 +66,7 @@ const Login = () => {
     const responseGoogle = async (data) => {
         
         try {
-           const res = await axios.post("https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/auth/google_login", {tokenId: data.tokenId})
+           const res = await axios.post("https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/auth/google_login", {tokenId: data.tokenId})
            Swal.fire({
             icon: "success",
             title: "Hurray...",

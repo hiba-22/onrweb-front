@@ -32,7 +32,7 @@ const EditProfile = () => {
 
         try {
             const response = await axios.patch(
-                `https://onrtech-11tcm8niu-hiba-21s-projects.vercel.app//api/v1/users`,
+                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/users`,
                 formData,
                 {
                     withCredentials: true,
