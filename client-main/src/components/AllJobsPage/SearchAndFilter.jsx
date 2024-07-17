@@ -41,7 +41,7 @@ const SearchAndFilter = () => {
     };
 
     useEffect(() => {
-        const baseUrl = "https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs?page=1&limit=5";
+        const baseUrl = "https://onr-backend.vercel.app/api/v1/jobs?page=1&limit=5";
         let url = baseUrl;
         const queryParams = {};
 

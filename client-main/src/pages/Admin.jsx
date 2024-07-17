@@ -9,7 +9,7 @@ const Admin = () => {
         queryKey: ["admin_info"],
         queryFn: () =>
             getAllHandler(
-                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/admin/info`
+                `https://onr-backend.vercel.app/api/v1/admin/info`
             ),
     });
 

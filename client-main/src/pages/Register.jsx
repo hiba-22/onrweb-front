@@ -39,7 +39,7 @@ const Register = () => {
             // posting
             try {
                 const response = await axios.post(
-                    "https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/auth/register",
+                    "https://onr-backend.vercel.app/api/v1/auth/register",
                     user
                 );
                     console.log(response);

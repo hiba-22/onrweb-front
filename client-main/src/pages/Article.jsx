@@ -21,7 +21,7 @@ const Article = () => {
         error,
     } = useQuery({
         queryKey: ["article", id],
-        queryFn: () => getSingleHandler(`https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/articles/${id}`),
+        queryFn: () => getSingleHandler(`https://onr-backend.vercel.app/api/v1/articles/${id}`),
     });
 
     if (isLoading) {

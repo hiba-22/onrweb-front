@@ -35,7 +35,7 @@ const EditJob = () => {
         queryKey: ["updateJob"],
         queryFn: () =>
             getSingleHandler(
-                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs/${id}`
+                `https://onr-backend.vercel.app/api/v1/jobs/${id}`
             ),
     });
 
@@ -107,7 +107,7 @@ const EditJob = () => {
         // posting;
         updateJobMutation.mutate({
             body: updateJob,
-            url: `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs/${id}`,
+            url: `https://onr-backend.vercel.app/api/v1/jobs/${id}`,
         });
     };
     // const onSubmit = (data) => {

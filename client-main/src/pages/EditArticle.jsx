@@ -20,7 +20,7 @@ const EditArticle = () => {
     const { isPending, isError, data: article, error } = useQuery({
         queryKey: ["updateArticle"],
         queryFn: () =>
-            getSingleHandler(`https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/articles/${id}`),
+            getSingleHandler(`https://onr-backend.vercel.app/api/v1/articles/${id}`),
     });
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -45,7 +45,7 @@ const EditArticle = () => {
     const updateArticleMutation = useMutation({
         mutationFn: async (formData) => {
             const response = await axios.put(
-                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/articles/${id}`,
+                `https://onr-backend.vercel.app/api/v1/articles/${id}`,
                 formData,
                 {
                     headers: {

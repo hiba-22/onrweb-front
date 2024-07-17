@@ -14,7 +14,7 @@ const PaginationCom = () => {
         // );
         // setItemOffset(newOffset);
         handleJobFetch(
-            `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs?page=${
+            `https://onr-backend.vercel.app/api/v1/jobs?page=${
                 e.selected + 1
             }&limit=6`
         );

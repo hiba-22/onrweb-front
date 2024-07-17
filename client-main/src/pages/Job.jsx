@@ -28,7 +28,7 @@ const Job = () => {
         queryKey: ["job"],
         queryFn: () =>
             getSingleHandler(
-                `https://onrtech-back-52ii77f9c-hiba-21s-projects.vercel.app/api/v1/jobs/${id}`
+                `https://onr-backend.vercel.app/api/v1/jobs/${id}`
             ),
     });
 
