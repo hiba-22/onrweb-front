@@ -1,4 +1,4 @@
-https://onr-backend.vercel.app/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import styled from "styled-components";
 import { CiSquarePlus } from "react-icons/ci";
