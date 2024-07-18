@@ -1,4 +1,4 @@
-https://onr-backend.vercel.appimport { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import styled from "styled-components";
 import { getAllHandler } from "../utils/FetchHandlers";

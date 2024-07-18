@@ -1,4 +1,4 @@
-https://onr-backend.vercel.appimport React from "react";
+import React from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import styled from "styled-components";
 import { useJobContext } from "../context/JobContext";

@@ -1,4 +1,4 @@
-https://onr-backend.vercel.appimport React from "react";
+import React from "react";
 
 import ReactPaginate from "react-paginate";
 import { useJobContext } from "../../context/JobContext";
