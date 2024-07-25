@@ -38,7 +38,7 @@ const AddService = () => {
 
         try {
             const response = await axios.post(
-                "http://onr-backend.vercel.app/api/v1/Services",
+                "http://onr-backend.vercel.app/api/v1/services",
                 formData,
                 {
                     withCredentials: true,

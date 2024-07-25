@@ -47,7 +47,7 @@ const EditService = () => {
     const updateServiceMutation = useMutation({
         mutationFn: async (formData) => {
             const response = await axios.put(
-                `http://onr-backend.vercel.app/api/v1/Services/${id}`,
+                `http://onr-backend.vercel.app/api/v1/services/${id}`,
                 formData,
                 {
                     headers: {
