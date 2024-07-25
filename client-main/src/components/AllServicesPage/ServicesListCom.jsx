@@ -4,7 +4,7 @@ import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
 import ServiceCard from "./ServiceCard";
 import { useUserContext } from "../../context/UserContext";
-const ServicesListCom = () => {
+const JobsListCom = () => {
   const { serviceLoading, services } = useServiceContext();
   const { user } = useUserContext();
   if (serviceLoading) {
@@ -109,4 +109,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default ServicesListCom;
+export default JobsListCom;
