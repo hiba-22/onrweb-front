@@ -25,7 +25,7 @@ const PaginationCom = () => {
             <ReactPaginate
                 breakLabel="..."
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={2}
+                pageRangeDisplayed={3}
                 pageCount={services?.pageCount}
                 previousLabel="<"
                 nextLabel=">"
