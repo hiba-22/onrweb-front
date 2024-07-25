@@ -54,11 +54,11 @@ const ServiceCard = ({ service }) => {
           )}
         </div>
         <div className="end-row">
-          <Link to={`/Service/${service._id}`} className="detail-btn">
+          <Link to={`/service/${service._id}`} className="detail-btn">
             details
           </Link>
           {user?._id === service?.createdBy && (
-            <Link to={`/dashboard/edit-Service/${service._id}`} className="detail-btn">
+            <Link to={`/dashboard/edit-service/${service._id}`} className="detail-btn">
               edit
             </Link>
           )}
