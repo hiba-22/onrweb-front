@@ -29,12 +29,16 @@ const ContactWrapper = styled.div`
             font-size: 1rem;
         }
     }
-
+    .form-div{
+        display: flex;
+        flex-direction: column;
+    }
     .form-content {
         flex: 1;
         display: flex;
         flex-direction: column;
         padding: 50px;
+        margin: 20px;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 10px;
         backdrop-filter: blur(10px);
@@ -155,8 +159,9 @@ const Contact = () => {
                             onChange={handleChange}
                             required
                         />
-                        <button type="submit">Soumettre</button>
                         </div>
+                        <button type="submit">Soumettre</button>
+                        
                     </form>
                 </div>
             </ContactWrapper>
