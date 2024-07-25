@@ -2,7 +2,7 @@ import React from "react";
 import { useServiceContext } from "../../context/ServiceContext";
 import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
-import JobCard from "./serviceCard";
+import JobCard from "./ServiceCard";
 import { useUserContext } from "../../context/UserContext";
 const JobsListCom = () => {
   const { serviceLoading, services } = useServiceContext();
