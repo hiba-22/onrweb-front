@@ -10,7 +10,7 @@ const Navbar = ({ navbarRef }) => {
             <div className="container">
                 <Logo />
                 <div className="flex justify-end items-center">
-                    <NavLink className="nav-item" to="/services">
+                    <NavLink className="nav-item" to="/all-services">
                         Services
                     </NavLink>
                     <NavLink className="nav-item" to="/all-jobs">

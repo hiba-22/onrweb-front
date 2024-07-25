@@ -1,7 +1,7 @@
 import React from "react";
 
-const ErrorArticle = () => {
-    return <div>this is the error Article page</div>;
+const ErrorService = () => {
+    return <div>this is the error Service page</div>;
 };
 
-export default ErrorArticle;
+export default ErrorService;

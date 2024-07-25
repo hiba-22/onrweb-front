@@ -20,7 +20,7 @@ const EditService = () => {
     const { isPending, isError, data: service, error } = useQuery({
         queryKey: ["updateService"],
         queryFn: () =>
-            getSingleHandler(`http://onr-backend.vercel.app/api/v1/Services/${id}`),
+            getSingleHandler(`http://onr-backend.vercel.app/api/v1/services/${id}`),
     });
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();

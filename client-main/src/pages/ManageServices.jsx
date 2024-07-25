@@ -18,10 +18,10 @@ const ManageServices = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["my-Services"],
+    queryKey: ["my-services"],
     queryFn: () =>
       axios
-        .get(`http://onr-backend.vercel.app/api/v1/Services/my-Services`, {
+        .get(`http://onr-backend.vercel.app/api/v1/services/my-services`, {
           withCredentials: true,
         })
         .then((response) => response.data),
@@ -45,7 +45,7 @@ const ManageServices = () => {
 
   const deleteServiceHandler = async (id) => {
     try {
-      await axios.delete(`http://onr-backend.vercel.app/api/v1/Services/${id}`, {
+      await axios.delete(`http://onr-backend.vercel.app/api/v1/services/${id}`, {
         withCredentials: true,
       });
 
