@@ -95,7 +95,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "services",
+                path: "all-services",
                 element: (
                     <ServiceContext>
                         <AllServices/>
