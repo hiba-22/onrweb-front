@@ -136,7 +136,6 @@ const ManageServices = () => {
     </Wrapper>
   );
 };
-
 const Wrapper = styled.section`
   .title-row {
     display: flex;

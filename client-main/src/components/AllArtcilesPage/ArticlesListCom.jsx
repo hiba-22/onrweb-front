@@ -76,7 +76,6 @@ const JobsListCom = () => {
     </Wrapper>
   );
 };
-
 const Wrapper = styled.div`
   background-color: var(--color-gray);
   width: 100%;
