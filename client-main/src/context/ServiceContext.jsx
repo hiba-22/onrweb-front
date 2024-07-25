@@ -25,7 +25,7 @@ const ServiceContext = ({ children }) => {
 
     useEffect(() => {
         handleServiceFetch(
-            `http://onr-backend.vercel.app/api/v1/services?page=1`
+            `https://onr-backend.vercel.app/api/v1/services?page=1`
         );
     }, []);
     const passing = {

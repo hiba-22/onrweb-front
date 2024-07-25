@@ -2,7 +2,7 @@ import React from "react";
 import { useServiceContext } from "../../context/ServiceContext";
 import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
-import JobCard from "./ServiceCard";
+import JobCard from "./serviceCard";
 import { useUserContext } from "../../context/UserContext";
 const JobsListCom = () => {
   const { serviceLoading, services } = useServiceContext();
@@ -14,17 +14,17 @@ const JobsListCom = () => {
   if (!services?.result?.length) {
     return (
       <h2 className="text-lg md:text-3xl text-center font-bold mt-24 text-red-600">
-        No Service Found
+        No service Found
       </h2>
     );
   }
 
-  // Calculate total Services for recruiter
+  // Calculate total services for recruiter
   const totalRecruiterServices = services?.result?.filter(
     (service) => service.createdBy === user._id
   ).length;
 
-  // Calculate total published Services for non-recruiters
+  // Calculate total published services for non-recruiters
   const totalPublishedServices = services?.result?.filter(
     (service) => service.isPublished
   ).length;
@@ -35,7 +35,7 @@ const JobsListCom = () => {
 
   return (
     <Wrapper> 
-      <h5 className="Service-count">
+      <h5 className="job-count">
         {user?.role === "recruiter" ? (
           <>
             Shows{" "}
@@ -46,12 +46,24 @@ const JobsListCom = () => {
             <span className="fancy">
               {totalCount < 10 ? `0${totalCount}` : totalCount}
             </span>{" "}
-            Services
+            services
           </>
           
         ) : (
           <>
-           
+            Shows{" "}
+            <span className="fancy">
+              {totalPublishedServices < 10
+                ? `0${totalPublishedServices}`
+                : totalPublishedServices}
+            </span>{" "}
+            of total{" "}
+            <span className="fancy">
+              {services?.result?.length < 10
+                ? `0${services?.result?.length}`
+                : services?.result?.length}
+            </span>{" "}
+            services Published
           </>
         )}
       </h5>
@@ -69,14 +81,14 @@ const Wrapper = styled.div`
   background-color: var(--color-gray);
   width: 100%;
   margin-top: 1.5rem;
-  .Service-count {
+  .job-count {
     margin-top: 14px;
     font-size: 11px;
     font-weight: 600;
     color: var(--color-black);
     opacity: 0.8;
   }
-  .Service-count .fancy {
+  .job-count .fancy {
     color: var(--color-primary);
     margin: 0 5px;
     font-size: 13px;
