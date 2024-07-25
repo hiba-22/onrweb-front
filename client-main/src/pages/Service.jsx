@@ -20,7 +20,7 @@ const Service = () => {
         data: service,
         error,
     } = useQuery({
-        queryKey: ["Service", id],
+        queryKey: ["service", id],
         queryFn: () => getSingleHandler(`http://onr-backend.vercel.app/api/v1/services/${id}`),
     });
 
