@@ -21,7 +21,7 @@ const ManageServices = () => {
     queryKey: ["my-services"],
     queryFn: () =>
       axios
-        .get(`http://onr-backend.vercel.app/api/v1/services/my-services`, {
+        .get(`https://onr-backend.vercel.app/api/v1/services/my-services`, {
           withCredentials: true,
         })
         .then((response) => response.data),
@@ -45,7 +45,7 @@ const ManageServices = () => {
 
   const deleteServiceHandler = async (id) => {
     try {
-      await axios.delete(`http://onr-backend.vercel.app/api/v1/services/${id}`, {
+      await axios.delete(`https://onr-backend.vercel.app/api/v1/services/${id}`, {
         withCredentials: true,
       });
 

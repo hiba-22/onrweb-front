@@ -6,7 +6,7 @@ const Landing = () => {
     const [searchQuery, setSearchQuery] = useState("");
     useEffect(() => {
         const baseUrl =
-            "http://onr-backend.vercel.app/api/v1/services?page=1&limit=6";
+            "https://onr-backend.vercel.app/api/v1/services?page=1&limit=6";
         let url = baseUrl;
         const queryParams = {};
 

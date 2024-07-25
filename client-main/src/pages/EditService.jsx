@@ -20,7 +20,7 @@ const EditService = () => {
     const { isPending, isError, data: service, error } = useQuery({
         queryKey: ["updateService"],
         queryFn: () =>
-            getSingleHandler(`http://onr-backend.vercel.app/api/v1/services/${id}`),
+            getSingleHandler(`https://onr-backend.vercel.app/api/v1/services/${id}`),
     });
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -47,7 +47,7 @@ const EditService = () => {
     const updateServiceMutation = useMutation({
         mutationFn: async (formData) => {
             const response = await axios.put(
-                `http://onr-backend.vercel.app/api/v1/services/${id}`,
+                `https://onr-backend.vercel.app/api/v1/services/${id}`,
                 formData,
                 {
                     headers: {

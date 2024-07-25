@@ -14,7 +14,7 @@ const PaginationCom = () => {
         // );
         // setItemOffset(newOffset);
         handleServiceFetch(
-            `http://onr-backend.vercel.app/api/v1/services?page=${
+            `https://onr-backend.vercel.app/api/v1/services?page=${
                 e.selected + 1
             }&limit=6`
         );
