@@ -75,10 +75,10 @@ const Wrapper = styled.div`
     height: 100%;
     box-shadow: 0 4px 4px var(--shadow-medium), 0 -2px 6px var(--shadow-medium);
     border-radius: 4px;
-    padding: 2rem 1.5rem;
+   
   }
   .card-container:hover {
-    background-image: linear-gradient(to bottom right, #247bf7 0%, #ffccff 100%);
+    background-image: linear-gradient(to right bottom, #eee 0%, #f0f0f0 100%);
   }
   .image-container {
     width: 100%;
@@ -138,6 +138,7 @@ const Wrapper = styled.div`
     grid-template-columns: 1fr;
     grid-row-gap: calc(0.6rem + 0.09vw);
     align-items: center;
+    padding: 2rem 1.5rem;
   }
   .location,
   .type,
