@@ -23,39 +23,18 @@ const Contact = () => {
             <Wrapper ref={heroRef}>
                 <div className="hero-content">
                     <div className="text-content">
-                        <h1> We Make   <span className="fancy">Creativity Work </span> 
-                            For Your Brand!
-                        </h1>
-                        <p>
-                            Ours Is A Team Of Creatives That Is Brainstorming On Great Ideas,
-                            <br></br>
-                            With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs.
-                        </p>
-                        <p>
-                            We regularly recruit and integrate partners into our international ecosystem.
-                            <br></br>
-                            Free application: <b>recruitment@Onrtech.com</b>
-                        </p>
-                        <div className="btn-grp">
-                            <Link className="btn" to="/all-jobs">
-                                Apply Now
-                            </Link>
-                        </div> 
+                     
                         
                     </div>
                     <div className="placeholder">
-                        <img src={photo} alt="job viva photo" />
+                        
                     </div>
 
                  
                 </div>
             </Wrapper>
             <div>
-            <PopularCategory/>
-            <HowWorks/>
-            <Team/>
-            <Testimonial/>
-            <Brands/>
+        
             </div>
         </>
     );
