@@ -51,19 +51,6 @@ const JobsListCom = () => {
           
         ) : (
           <>
-            Shows{" "}
-            <span className="fancy">
-              {totalPublishedServices < 10
-                ? `0${totalPublishedServices}`
-                : totalPublishedServices}
-            </span>{" "}
-            of total{" "}
-            <span className="fancy">
-              {services?.result?.length < 10
-                ? `0${services?.result?.length}`
-                : services?.result?.length}
-            </span>{" "}
-            services Published
           </>
         )}
       </h5>

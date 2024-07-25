@@ -14,7 +14,7 @@ const JobsListCom = () => {
     if (!jobs?.result?.length) {
         return (
             <h2 className="text-lg md:text-3xl text-center font-bold mt-24 text-red-600">
-                No Job Found
+                No offer Found
             </h2>
         );
     }
@@ -33,7 +33,7 @@ const JobsListCom = () => {
                         ? `0${jobs?.totalJobs}`
                         : jobs?.totalJobs}
                 </span>
-                Jobs
+                Offers
             </h5>
 
             <div className="list-container">

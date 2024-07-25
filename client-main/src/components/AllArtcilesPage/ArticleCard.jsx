@@ -40,12 +40,14 @@ const ArticleCard = ({ article }) => {
             <h4 className="company">- {article?.titre}</h4>
           </div>
         </div>
+        {user?._id === article?.createdBy && (
           <div className="status capitalize">
             <TbTargetArrow className="mr-2 text-lg" />
             <span className={article?.isPublished ? "published" : "draft"}>
               {article?.isPublished ? "Published" : "Draft"}
             </span>
           </div>
+          )}
         </div>
         <div className="end-row">
           <Link to={`/article/${article._id}`} className="detail-btn">

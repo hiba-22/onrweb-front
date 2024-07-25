@@ -125,9 +125,11 @@ const JobCard = ({ job }) => {
           </div>
         </div>
         <div className="end-row">
+        {user?._id === job?.createdBy && (
           <Link to={`/job/${job._id}`} className="detail-btn">
             details
           </Link>
+        )}
           {!isAdminOrRecruiter() && (
             <button className="apply-btn" onClick={handleApply}>
               Apply

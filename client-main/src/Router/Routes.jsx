@@ -7,6 +7,7 @@ import {
     Register,
     Login,
     Landing,
+    ContactPage,
     Error,
     AllJobs,
     Stats,
@@ -49,6 +50,12 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Landing />,
+            },            {
+                path: "contact",
+                element: (
+                    <ContactPage />
+
+                ),
             },
             {
                 path: "all-jobs",

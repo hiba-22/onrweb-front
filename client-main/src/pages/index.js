@@ -22,6 +22,7 @@ export { default as ErrorJob } from "./ErrorJob";
 export { default as ErrorArticle } from "./ErrorArticle";
 export { default as ErrorService } from "./ErrorService";
 export { default as Landing } from "./Landing";
+export { default as ContactPage } from "./ContactPage";
 export { default as Login } from "./Login";
 export { default as ForgetPassword } from "./ForgetPassword";
 export { default as ResetPassword } from "./ResetPassword";
