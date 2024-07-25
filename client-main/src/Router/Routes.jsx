@@ -26,10 +26,16 @@ import {
     EditArticle,
     Article,
     ManageArticles,
+    AddService,
+    AllServices,
+    EditService,
+    Service,
+    ManageServices,
 } from "../pages";
 
 import { JobContext } from "../context/JobContext";
 import { ArticleContext  } from "../context/ArticleContext";
+import { ServiceContext } from "../context/ServiceContext";
 import CommonProtectRoute from "../components/shared/CommonProtectRoute";
 import ProtectAdminRoute from "../components/shared/ProtectAdminRoute";
 import RecruiterRoute from "../components/shared/RecruiterRoute";
@@ -88,7 +94,22 @@ const router = createBrowserRouter([
                     
                 ),
             },
-
+            {
+                path: "services",
+                element: (
+                    <ServiceContext>
+                        <AllServices/>
+                    </ServiceContext>   
+                ),
+            },
+            {
+                path: "service/:id",
+                element: (
+                    <ServiceContext>
+                        <Service />
+                    </ServiceContext>
+                ),
+            },
             {
                 path: "register",
                 element: <Register></Register>,
@@ -165,6 +186,22 @@ const router = createBrowserRouter([
                         ),
                     },
                     {
+                        path: "add-services",
+                        element: (
+                            <RecruiterRoute>
+                                <AddService />
+                            </RecruiterRoute>
+                        ),
+                    },
+                    {
+                        path: "manage-services",
+                        element: (
+                            <RecruiterRoute>
+                                <ManageServices />
+                            </RecruiterRoute>
+                        ),
+                    },
+                    {
                         path: "manage-users",
                         element: (
                             <ProtectAdminRoute>
@@ -193,6 +230,14 @@ const router = createBrowserRouter([
                         element: (
                             <RecruiterRoute>
                                 <EditArticle />
+                            </RecruiterRoute>
+                        ),
+                    },
+                    {
+                        path: "edit-service/:id",
+                        element: (
+                            <RecruiterRoute>
+                                <EditService />
                             </RecruiterRoute>
                         ),
                     },
