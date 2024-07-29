@@ -64,7 +64,7 @@ const ContactWrapper = styled.div`
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: #70b7e775;
         }
     }
 `;
