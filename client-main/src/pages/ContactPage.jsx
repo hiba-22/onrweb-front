@@ -55,7 +55,7 @@ const ContactWrapper = styled.div`
 
         button {
             padding: 15px;
-            background-color: rgb(80, 149, 249);
+            background-color: rgb(222 238 249);
             color: white;
             border: none;
             border-radius: 5px;
@@ -64,7 +64,7 @@ const ContactWrapper = styled.div`
         }
 
         button:hover {
-            background-color: #70b7e775;
+            background-color: rgb(192 224 245);
         }
     }
 `;
