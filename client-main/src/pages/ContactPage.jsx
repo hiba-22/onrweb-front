@@ -39,7 +39,7 @@ const ContactWrapper = styled.div`
         flex-direction: column;
         padding: 50px;
         margin: 20px;
-        background: linear-gradient(135deg, rgb(112 183 231 / 46%), rgb(255 255 255));
+        background: linear-gradient(135deg, rgb(0 152 255 / 27%), rgb(255, 255, 255));
      
         border-radius: 10px;
         backdrop-filter: blur(10px);
@@ -55,7 +55,7 @@ const ContactWrapper = styled.div`
 
         button {
             padding: 15px;
-            background-color: rgb(222 238 249);
+            background-color: rgb(188 228 255);
             color: white;
             border: none;
             border-radius: 5px;
