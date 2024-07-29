@@ -39,6 +39,7 @@ const ContactWrapper = styled.div`
         flex-direction: column;
         padding: 50px;
         margin: 20px;
+        background: linear-gradient(135deg, rgb(112 183 231 / 46%), rgb(255 255 255));
         background: rgba(255, 255, 255, 0.2);
         border-radius: 10px;
         backdrop-filter: blur(10px);
@@ -72,8 +73,8 @@ const Contact = () => {
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        Name: '',
+        Subject: '',
         email: '',
         phone: '',
         message: ''
@@ -96,8 +97,8 @@ const Contact = () => {
             if (response.data.success) {
                 alert('Message sent successfully');
                 setFormData({
-                    firstName: '',
-                    lastName: '',
+                    Name: '',
+                    Subject: '',
                     email: '',
                     phone: '',
                     message: ''
@@ -119,27 +120,27 @@ const Contact = () => {
                 </div>
                 <div className="form-content">
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="firstName"
-                            placeholder="Prénom"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            required
-                        />
-                        <input
-                            type="text"
-                            name="lastName"
-                            placeholder="Nom"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            required
-                        />
                         <div className="form-div">
+                        <input
+                            type="text"
+                            name="Name"
+                            placeholder="Name"
+                            value={formData.Name}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="Subject"
+                            placeholder="Subject"
+                            value={formData.Subject}
+                            onChange={handleChange}
+                            required
+                        />
                         <input
                             type="email"
                             name="email"
-                            placeholder="Adresse e-mail"
+                            placeholder="Email"
                             value={formData.email}
                             onChange={handleChange}
                             required
@@ -147,20 +148,20 @@ const Contact = () => {
                         <input
                             type="tel"
                             name="phone"
-                            placeholder="Numéro de téléphone"
+                            placeholder="Phone"
                             value={formData.phone}
                             onChange={handleChange}
                             required
                         />
                         <textarea
                             name="message"
-                            placeholder="Parlez-nous un peu de votre projet"
+                            placeholder="How can help you"
                             value={formData.message}
                             onChange={handleChange}
                             required
                         />
                         </div>
-                        <button type="submit">Soumettre</button>
+                        <button type="submit">Submit</button>
                         
                     </form>
                 </div>
