@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/shared/Navbar";
-import React, { useRef } from 'react';
+
 import emailjs from '@emailjs/browser';
 
 const ContactWrapper = styled.div`
