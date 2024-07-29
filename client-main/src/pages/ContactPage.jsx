@@ -8,12 +8,12 @@ const ContactWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    
 
     .text-content {
         flex: 1;
         padding: 50px;
-        color: white;
+        
 
         h1 {
             font-size: 2.5rem;
