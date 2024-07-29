@@ -40,7 +40,7 @@ const ContactWrapper = styled.div`
         padding: 50px;
         margin: 20px;
         background: linear-gradient(135deg, rgb(112 183 231 / 46%), rgb(255 255 255));
-        background: rgba(255, 255, 255, 0.2);
+     
         border-radius: 10px;
         backdrop-filter: blur(10px);
 
@@ -55,7 +55,7 @@ const ContactWrapper = styled.div`
 
         button {
             padding: 15px;
-            background-color: #3498db;
+            background-color: rgb(80, 149, 249);
             color: white;
             border: none;
             border-radius: 5px;
