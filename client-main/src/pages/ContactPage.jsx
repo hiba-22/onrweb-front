@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/shared/Navbar";
-import axios from "axios";
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 const ContactWrapper = styled.div`
     display: flex;
@@ -72,42 +73,33 @@ const ContactWrapper = styled.div`
 const Contact = () => {
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
-    const [formData, setFormData] = useState({
-        Name: '',
-        Subject: '',
-        email: '',
-        phone: '',
-        message: ''
-    });
+    const form = useRef();
+
+    const sendEmail = (e) => {
+      e.preventDefault();
+  
+      emailjs
+        .sendForm('service_yy49ssl', 'template_4p7j7bj', form.current, {
+          publicKey: 'M2zBgsbvSJrGg-zHj',
+        })
+        .then(
+          () => {
+            console.log('SUCCESS!');
+          },
+          (error) => {
+            console.log('FAILED...', error.text);
+          },
+        );
+    };
 
     useEffect(() => {
         const navbarHeight = navbarRef.current.getBoundingClientRect().height;
         heroRef.current.style.minHeight = `calc(100vh - ${navbarHeight}px)`;
     }, []);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/api/contact', formData);
-            if (response.data.success) {
-                alert('Message sent successfully');
-                setFormData({
-                    Name: '',
-                    Subject: '',
-                    email: '',
-                    phone: '',
-                    message: ''
-                });
-            }
-        } catch (error) {
-            alert('Failed to send message');
-        }
-    };
+
+
 
     return (
         <>
@@ -119,45 +111,35 @@ const Contact = () => {
                     <p>Envoyez-nous un message et nous vous répondrons dans les meilleurs délais.</p>
                 </div>
                 <div className="form-content">
-                    <form onSubmit={handleSubmit}>
+                    <form ref={form} onSubmit={sendEmail}>
                         <div className="form-div">
                         <input
                             type="text"
-                            name="Name"
+                            name="user_name"
                             placeholder="Name"
-                            value={formData.Name}
-                            onChange={handleChange}
                             required
                         />
                         <input
                             type="text"
-                            name="Subject"
+                            name="user_subject"
                             placeholder="Subject"
-                            value={formData.Subject}
-                            onChange={handleChange}
                             required
                         />
                         <input
                             type="email"
-                            name="email"
+                            name="user_email"
                             placeholder="Email"
-                            value={formData.email}
-                            onChange={handleChange}
                             required
                         />
                         <input
                             type="tel"
-                            name="phone"
+                            name="user_phone"
                             placeholder="Phone"
-                            value={formData.phone}
-                            onChange={handleChange}
                             required
                         />
                         <textarea
                             name="message"
                             placeholder="How can help you"
-                            value={formData.message}
-                            onChange={handleChange}
                             required
                         />
                         </div>
