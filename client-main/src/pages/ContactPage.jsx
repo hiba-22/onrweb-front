@@ -117,10 +117,11 @@ const Contact = () => {
                 <div className="form-content">
                     <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-div">
+                        <label>Name</label>
                             <input
                                 type="text"
                                 name="user_name"
-                                placeholder="Name"
+                                placeholder="User"
                                 {...register("user_name", {
                                     required: {
                                         value: true,
@@ -141,7 +142,7 @@ const Contact = () => {
                                     {errors.user_name.message}
                                 </span>
                             )}
-
+                            <label>Subject</label>
                             <input
                                 type="text"
                                 name="user_subject"
@@ -166,11 +167,11 @@ const Contact = () => {
                                     {errors.user_subject.message}
                                 </span>
                             )}
-
+                            <label>Email</label>
                             <input
                                 type="email"
                                 name="user_email"
-                                placeholder="Email"
+                                placeholder="user@gmail.com"
                                 {...register("user_email", {
                                     required: {
                                         value: true,
@@ -187,11 +188,11 @@ const Contact = () => {
                                     {errors.user_email.message}
                                 </span>
                             )}
-
+                            <label>Phone</label>
                             <input
                                 type="tel"
                                 name="user_phone"
-                                placeholder="Phone"
+                                placeholder="+216 12345678"
                                 {...register("user_phone", {
                                     required: {
                                         value: true,
@@ -208,7 +209,7 @@ const Contact = () => {
                                     {errors.user_phone.message}
                                 </span>
                             )}
-
+                            <label>Message</label>
                             <textarea
                                 name="message"
                                 placeholder="How can we help you?"
