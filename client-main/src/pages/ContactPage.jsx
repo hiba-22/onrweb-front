@@ -239,14 +239,14 @@ const Contact = () => {
                             )}
                             <label>Phone</label>
                             <div className="phone-input">
-                                <select value={selectedCountry.name} onChange={handleCountryChange}>
+                                <select  value={selectedCountry.name} onChange={handleCountryChange}>
                                     {countries.map((country) => (
                                         <option key={country.code} value={country.name}>
                                             {country.name}
                                         </option>
                                     ))}
                                 </select>
-                                <div className="country-code">{selectedCountry.code}</div>
+                                <div className="country-code" name="code">{selectedCountry.code}</div>
                                 <input
                                     type="text"
                                     name="user_phone"
