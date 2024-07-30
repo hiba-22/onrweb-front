@@ -10,8 +10,6 @@ const ContactWrapper = styled.div`
     align-items: center;
     height: 100vh;
     
-   
-
     .text-content {
         flex: 1;
         padding: 50px;
@@ -79,6 +77,45 @@ const ContactWrapper = styled.div`
     }
 `;
 
+const PhoneInputWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    select {
+        padding: 15px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        background-color: #00d2ff;
+        color: white;
+        font-size: 1rem;
+        outline: none;
+        width: 150px;
+    }
+
+    .country-code {
+        padding: 15px;
+        border: none;
+        border-left: 1px solid #ddd;
+        border-radius: 0 5px 5px 0;
+        font-size: 1rem;
+        outline: none;
+        background-color: #f5f5f5;
+        width: 60px;
+        text-align: center;
+    }
+
+    input[type="text"] {
+        padding: 15px;
+        border: none;
+        border-left: 1px solid #ddd;
+        border-radius: 0 5px 5px 0;
+        font-size: 1rem;
+        outline: none;
+        flex: 1;
+    }
+`;
+
 const Contact = () => {
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
@@ -110,18 +147,18 @@ const Contact = () => {
             <Navbar navbarRef={navbarRef} />
             <ContactWrapper ref={heroRef}>
                 <div className="text-content">
-                    <h1> <strong>You have a project ?</strong></h1>
+                    <h1><strong>You have a project ?</strong></h1>
                     <h2>Contact us</h2>
                     <p>Send us a message and we'll get back to you as soon as possible.</p>
                 </div>
                 <div className="form-content">
                     <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-div">
-                        <label>Name</label>
+                            <label>Name</label>
                             <input
                                 type="text"
                                 name="user_name"
-                                placeholder="User"
+                                placeholder="Name"
                                 {...register("user_name", {
                                     required: {
                                         value: true,
@@ -138,7 +175,7 @@ const Contact = () => {
                                 })}
                             />
                             {errors.user_name && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_name.message}
                                 </span>
                             )}
@@ -163,7 +200,7 @@ const Contact = () => {
                                 })}
                             />
                             {errors.user_subject && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_subject.message}
                                 </span>
                             )}
@@ -184,43 +221,39 @@ const Contact = () => {
                                 })}
                             />
                             {errors.user_email && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_email.message}
                                 </span>
                             )}
                             <label>Phone</label>
-                            <div>
-                                <select>
-                                    <option>Tunisie</option>
-                                    <option>France</option>
-                                    <option>Italie</option>
+                            <PhoneInputWrapper>
+                                <select {...register("country", { required: true })}>
+                                    <option value="Tunisia">Tunisia</option>
+                                    <option value="France">France</option>
+                                    <option value="Italy">Italy</option>
                                 </select>
-                                <div>
-                                    +216
-                                </div>
-                                <input type="number"
-                                placeholder="22541729" />
-                            </div>
-                          {/* <input
-                                type="tel"
-                                name="user_phone"
-                                placeholder="+216 12345678"
-                                {...register("user_phone", {
-                                    required: {
-                                        value: true,
-                                        message: "Phone is required",
-                                    },
-                                    pattern: {
-                                        value: /^\+?\d{10,15}$/,
-                                        message: "Invalid phone number",
-                                    },
-                                })}
-                            />
+                                <div className="country-code">+216</div>
+                                <input
+                                    type="text"
+                                    name="user_phone"
+                                    placeholder="Phone number"
+                                    {...register("user_phone", {
+                                        required: {
+                                            value: true,
+                                            message: "Phone is required",
+                                        },
+                                        pattern: {
+                                            value: /^\d{8}$/,
+                                            message: "Invalid phone number",
+                                        },
+                                    })}
+                                />
+                            </PhoneInputWrapper>
                             {errors.user_phone && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_phone.message}
                                 </span>
-                            )}*/}
+                            )}
                             <label>Message</label>
                             <textarea
                                 name="message"
@@ -237,7 +270,7 @@ const Contact = () => {
                                 })}
                             />
                             {errors.message && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.message.message}
                                 </span>
                             )}
