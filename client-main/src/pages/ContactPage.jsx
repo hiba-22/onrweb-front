@@ -125,7 +125,7 @@ const Contact = () => {
     const heroRef = useRef(null);
     const form = useRef();
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const [selectedCountry, setSelectedCountry] = useState(countries[0]);
 
     const handleCountryChange = (event) => {
@@ -136,6 +136,12 @@ const Contact = () => {
     };
 
     const onSubmit = (data) => {
+        const fullPhoneNumber = `${selectedCountry.code}${data.user_phone}`;
+        const formData = {
+            ...data,
+            user_phone: fullPhoneNumber,
+        };
+
         emailjs.sendForm('service_yy49ssl', 'template_4p7j7bj', form.current, 'M2zBgsbvSJrGg-zHj')
             .then(
                 () => {
@@ -239,14 +245,14 @@ const Contact = () => {
                             )}
                             <label>Phone</label>
                             <div className="phone-input">
-                                <select  value={selectedCountry.name} onChange={handleCountryChange}>
+                                <select value={selectedCountry.name} onChange={handleCountryChange}>
                                     {countries.map((country) => (
                                         <option key={country.code} value={country.name}>
                                             {country.name}
                                         </option>
                                     ))}
                                 </select>
-                                <div className="country-code" name="code">{selectedCountry.code}</div>
+                                <div className="country-code">{selectedCountry.code}</div>
                                 <input
                                     type="text"
                                     name="user_phone"
