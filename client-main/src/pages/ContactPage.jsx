@@ -81,7 +81,11 @@ const PhoneInputWrapper = styled.div`
     display: flex;
     align-items: flex-start
     margin-bottom: 20px;
-
+    flex-direction: row
+    flex-wrap: nowrap
+    align-content: normal
+    justify-content: normal
+    
     select {
         padding: 15px;
         border: none;
