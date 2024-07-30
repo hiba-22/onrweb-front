@@ -9,7 +9,7 @@ const ContactWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to right, #3a7bd5, #00d2ff);
+    
     color: white;
 
     .text-content {
@@ -42,7 +42,7 @@ const ContactWrapper = styled.div`
         flex-direction: column;
         padding: 50px;
         margin: 20px;
-        background: rgba(255, 255, 255, 0.1);
+        background: linear-gradient(to right, #3a7bd5, #00d2ff);
         border-radius: 10px;
         backdrop-filter: blur(10px);
 
