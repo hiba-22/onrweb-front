@@ -1,22 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/shared/Navbar";
-import emailjs from "@emailjs/browser";
+import emailjs from '@emailjs/browser';
 import { useForm } from "react-hook-form";
-
-const countries = [
-    { name: "Tunisia", code: "+216" },
-    { name: "France", code: "+33" },
-    { name: "Italy", code: "+39" },
-    // Add more countries as needed
-];
 
 const ContactWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-
+    
     .text-content {
         flex: 1;
         padding: 50px;
@@ -81,42 +74,51 @@ const ContactWrapper = styled.div`
             margin-top: -15px;
             margin-bottom: 15px;
         }
+    }
+`;
 
-        .phone-input {
-            display: flex;
-            align-items: center;
+const PhoneInputWrapper = styled.div`
+    display: flex;
+    align-items: flex-start
+    margin-bottom: 20px;
+    flex-direction: row
+    flex-wrap: nowrap
+    align-content: normal
+    justify-content: normal
+    
+    select {
+        padding: 15px;
+        border: none;
+        border-left: 1px solid #ddd;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 1rem;
+        outline: none;
+        background-color: #f5f5f5;
+        width: 150px;
+        text-align: center;
+        
+    }
 
-            select {
-                padding: 15px;
-                border: none;
-                border-radius: 5px 0 0 5px;
-                background-color: #00d2ff;
-                color: white;
-                font-size: 1rem;
-                outline: none;
-                width: 150px;
-            }
+    .country-code {
+        padding: 15px;
+        border: none;
+        border-left: 1px solid #ddd;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 1rem;
+        outline: none;
+        background-color: #f5f5f5;
+        width: 60px;
+        text-align: center;
+        height: fit-content;
+    }
 
-            .country-code {
-                padding: 15px;
-                border: none;
-                background-color: #f5f5f5;
-                font-size: 1rem;
-                outline: none;
-                width: 60px;
-                text-align: center;
-            }
-
-            input[type="text"] {
-                padding: 15px;
-                border: none;
-                border-left: 1px solid #ddd;
-                border-radius: 0 5px 5px 0;
-                font-size: 1rem;
-                outline: none;
-                flex: 1;
-            }
-        }
+    input[type="text"] {
+        padding: 15px;
+        border: none;
+        border-left: 1px solid #ddd;
+        font-size: 1rem;
+        outline: none;
+        flex: 1;
     }
 `;
 
@@ -125,23 +127,9 @@ const Contact = () => {
     const heroRef = useRef(null);
     const form = useRef();
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-    const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-
-    const handleCountryChange = (event) => {
-        const selected = countries.find(
-            (country) => country.name === event.target.value
-        );
-        setSelectedCountry(selected);
-    };
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        const fullPhoneNumber = `${selectedCountry.code}${data.user_phone}`;
-        const formData = {
-            ...data,
-            user_phone: fullPhoneNumber,
-        };
-
         emailjs.sendForm('service_yy49ssl', 'template_4p7j7bj', form.current, 'M2zBgsbvSJrGg-zHj')
             .then(
                 () => {
@@ -165,7 +153,7 @@ const Contact = () => {
             <Navbar navbarRef={navbarRef} />
             <ContactWrapper ref={heroRef}>
                 <div className="text-content">
-                    <h1> <strong>You have a project ?</strong></h1>
+                    <h1><strong>You have a project ?</strong></h1>
                     <h2>Contact us</h2>
                     <p>Send us a message and we'll get back to you as soon as possible.</p>
                 </div>
@@ -176,7 +164,7 @@ const Contact = () => {
                             <input
                                 type="text"
                                 name="user_name"
-                                placeholder="User"
+                                placeholder="Name"
                                 {...register("user_name", {
                                     required: {
                                         value: true,
@@ -193,7 +181,7 @@ const Contact = () => {
                                 })}
                             />
                             {errors.user_name && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_name.message}
                                 </span>
                             )}
@@ -218,7 +206,7 @@ const Contact = () => {
                                 })}
                             />
                             {errors.user_subject && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_subject.message}
                                 </span>
                             )}
@@ -239,20 +227,18 @@ const Contact = () => {
                                 })}
                             />
                             {errors.user_email && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_email.message}
                                 </span>
                             )}
                             <label>Phone</label>
-                            <div className="phone-input">
-                                <select value={selectedCountry.name} onChange={handleCountryChange}>
-                                    {countries.map((country) => (
-                                        <option key={country.code} value={country.name}>
-                                            {country.name}
-                                        </option>
-                                    ))}
+                            <PhoneInputWrapper>
+                                <select {...register("country", { required: true })}>
+                                    <option value="Tunisia">Tunisia</option>
+                                    <option value="France">France</option>
+                                    <option value="Italy">Italy</option>
                                 </select>
-                                <div className="country-code">{selectedCountry.code}</div>
+                                <div className="country-code">+216</div>
                                 <input
                                     type="text"
                                     name="user_phone"
@@ -263,14 +249,14 @@ const Contact = () => {
                                             message: "Phone is required",
                                         },
                                         pattern: {
-                                            value: /^\d{7,15}$/,
+                                            value: /^\d{8}$/,
                                             message: "Invalid phone number",
                                         },
                                     })}
                                 />
-                            </div>
+                            </PhoneInputWrapper>
                             {errors.user_phone && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.user_phone.message}
                                 </span>
                             )}
@@ -290,7 +276,7 @@ const Contact = () => {
                                 })}
                             />
                             {errors.message && (
-                                <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
+                                <span className="error">
                                     {errors.message.message}
                                 </span>
                             )}
