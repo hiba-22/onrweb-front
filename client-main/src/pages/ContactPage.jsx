@@ -171,7 +171,7 @@ const Contact = () => {
                             <input
                                 type="email"
                                 name="user_email"
-                                placeholder="user@gmail.com"
+                                placeholder="example@gmail.com"
                                 {...register("user_email", {
                                     required: {
                                         value: true,
@@ -189,7 +189,19 @@ const Contact = () => {
                                 </span>
                             )}
                             <label>Phone</label>
-                            <input
+                            <div>
+                                <select>
+                                    <option>Tunisie</option>
+                                    <option>France</option>
+                                    <option>Italie</option>
+                                </select>
+                                <div>
+                                    +216
+                                </div>
+                                <input type="number"
+                                placeholder="22541729" />
+                            </div>
+                          {/* <input
                                 type="tel"
                                 name="user_phone"
                                 placeholder="+216 12345678"
@@ -208,7 +220,7 @@ const Contact = () => {
                                 <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
                                     {errors.user_phone.message}
                                 </span>
-                            )}
+                            )}*/}
                             <label>Message</label>
                             <textarea
                                 name="message"
