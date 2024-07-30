@@ -79,7 +79,7 @@ const ContactWrapper = styled.div`
 
 const PhoneInputWrapper = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start
     margin-bottom: 20px;
 
     select {
