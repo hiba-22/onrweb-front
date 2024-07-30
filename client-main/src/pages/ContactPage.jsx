@@ -110,7 +110,7 @@ const Contact = () => {
             <Navbar navbarRef={navbarRef} />
             <ContactWrapper ref={heroRef}>
                 <div className="text-content">
-                    <h1>You have a project ?</h1>
+                    <h1> <strong>You have a project ?</strong></h1>
                     <h2>Contact us</h2>
                     <p>Send us a message and we'll get back to you as soon as possible.</p>
                 </div>
