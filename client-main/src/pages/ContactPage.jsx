@@ -110,9 +110,9 @@ const Contact = () => {
             <Navbar navbarRef={navbarRef} />
             <ContactWrapper ref={heroRef}>
                 <div className="text-content">
-                    <h1>Vous avez un projet ?</h1>
-                    <h2>Contactez-nous</h2>
-                    <p>Envoyez-nous un message et nous vous répondrons dans les meilleurs délais.</p>
+                    <h1>You have a project ?</h1>
+                    <h2>Contact us</h2>
+                    <p>Send us a message and we'll get back to you as soon as possible.</p>
                 </div>
                 <div className="form-content">
                     <form ref={form} onSubmit={handleSubmit(onSubmit)}>
