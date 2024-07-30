@@ -89,31 +89,32 @@ const PhoneInputWrapper = styled.div`
     select {
         padding: 15px;
         border: none;
-        border-radius: 5px 0 0 5px;
+        border-radius: 5px 5px 5px 5px;
         background-color: #00d2ff;
         color: white;
         font-size: 1rem;
         outline: none;
         width: 150px;
+        height: 55px;
     }
 
     .country-code {
         padding: 15px;
         border: none;
         border-left: 1px solid #ddd;
-        border-radius: 0 5px 5px 0;
+        border-radius: 5px 5px 5px 5px;
         font-size: 1rem;
         outline: none;
         background-color: #f5f5f5;
         width: 60px;
         text-align: center;
+        height: fit-content;
     }
 
     input[type="text"] {
         padding: 15px;
         border: none;
         border-left: 1px solid #ddd;
-        border-radius: 0 5px 5px 0;
         font-size: 1rem;
         outline: none;
         flex: 1;
