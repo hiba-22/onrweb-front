@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/shared/Navbar";
-import emailjs from '@emailjs/browser';
 import { useForm } from "react-hook-form";
 import { validateEmail, validateMessage, validateName, validateSubject } from "../utils/validation";
 import InlineError from "../utils/InlineError";
-import 'react-phone-number-input/style.css'
+import 'react-phone-number-input/style.css';
 import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber, isPossiblePhoneNumber } from 'react-phone-number-input';
 
 const ContactWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100vh;
 
     .text-content {
         flex: 1;
@@ -107,7 +105,6 @@ const PhoneInputWrapper = styled.div`
 const Contact = () => {
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
-    const form = useRef();
     const [name, setName] = useState("");
     const [subject, setSubject] = useState("");
     const [email, setEmail] = useState("");
@@ -119,27 +116,34 @@ const Contact = () => {
     const [messageError, setMessageError] = useState();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const formattedPhone = phone ? formatPhoneNumberIntl(phone) : '';
         const formData = {
-            ...data,
-            user_phone: formattedPhone,
-            user_name : name,
-            user_email: email,
-            user_subject : subject,
+            name,
+            phone: formattedPhone,
+            email,
+            subject,
+            message,
         };
 
-        emailjs.send('service_yy49ssl', 'template_4p7j7bj', formData, 'M2zBgsbvSJrGg-zHj')
-            .then(
-                () => {
-                    console.log('SUCCESS!');
-                    alert('Message sent successfully');
+        try {
+            const response = await fetch('https://onr-backend.vercel.app/api/v1/Contact/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                (error) => {
-                    console.log('FAILED...', error.text);
-                    alert('Failed to send message');
-                }
-            );
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert('Message sent successfully');
+            } else {
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to send message');
+        }
     };
 
     useEffect(() => {
@@ -161,7 +165,7 @@ const Contact = () => {
                     <p>Send us a message and we'll get back to you as soon as possible.</p>
                 </div>
                 <div className="form-content">
-                    <form ref={form} onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-div">
                             <label>Name</label>
                             <input
@@ -169,14 +173,14 @@ const Contact = () => {
                                 onChange={(e) => setName(e.target.value)}
                                 required
                                 type="text"
-                                name="user_name"
+                                name="name"
                                 placeholder="Name"
                             />
                             {nameError && <InlineError error={nameError} />}
                             <label>Subject</label>
                             <input
                                 type="text"
-                                name="user_subject"
+                                name="subject"
                                 placeholder="Subject"
                                 value={subject}
                                 onChange={(e) => setSubject(e.target.value)}
@@ -186,7 +190,7 @@ const Contact = () => {
                             <label>Email</label>
                             <input
                                 type="email"
-                                name="user_email"
+                                name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -196,7 +200,7 @@ const Contact = () => {
                             <PhoneInputWrapper>
                                 <PhoneInput
                                     className="phoneInput"
-                                    name="user_phone"
+                                    name="phone"
                                     defaultCountry="TN"
                                     value={phone}
                                     onChange={(value) => setPhone(value)}
