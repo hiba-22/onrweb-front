@@ -3,13 +3,17 @@ import styled from "styled-components";
 import Navbar from "../components/shared/Navbar";
 import emailjs from '@emailjs/browser';
 import { useForm } from "react-hook-form";
+import { validateEmail, validateMessage, validateName, validateSubject } from "../utils/validation";
+import InlineError from "../utils/InlineError";
+import 'react-phone-number-input/style.css'
+import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber, isPossiblePhoneNumber } from 'react-phone-number-input';
 
 const ContactWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    
+
     .text-content {
         flex: 1;
         padding: 50px;
@@ -52,6 +56,7 @@ const ContactWrapper = styled.div`
             border-radius: 5px;
             font-size: 1rem;
             color: black;
+            width: -webkit-fill-available;
         }
 
         button {
@@ -74,51 +79,28 @@ const ContactWrapper = styled.div`
             margin-top: -15px;
             margin-bottom: 15px;
         }
+
+        .valid {
+            color: #51b851d9;
+            font-size: 0.8rem;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
     }
 `;
 
 const PhoneInputWrapper = styled.div`
     display: flex;
-    align-items: flex-start
+    align-items: flex-start;
     margin-bottom: 20px;
-    flex-direction: row
-    flex-wrap: nowrap
-    align-content: normal
-    justify-content: normal
-    
-    select {
-        padding: 15px;
-        border: none;
-        border-left: 1px solid #ddd;
-        border-radius: 5px 5px 5px 5px;
-        font-size: 1rem;
-        outline: none;
-        background-color: #f5f5f5;
-        width: 150px;
-        text-align: center;
-        
-    }
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: normal;
+    justify-content: normal;
+    margin-left: 1px;
 
-    .country-code {
-        padding: 15px;
-        border: none;
-        border-left: 1px solid #ddd;
-        border-radius: 5px 5px 5px 5px;
-        font-size: 1rem;
-        outline: none;
-        background-color: #f5f5f5;
-        width: 60px;
-        text-align: center;
-        height: fit-content;
-    }
-
-    input[type="text"] {
-        padding: 15px;
-        border: none;
-        border-left: 1px solid #ddd;
-        font-size: 1rem;
-        outline: none;
-        flex: 1;
+    .phoneInput {
+        width: -webkit-fill-available;
     }
 `;
 
@@ -126,11 +108,28 @@ const Contact = () => {
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
     const form = useRef();
-
+    const [name, setName] = useState("");
+    const [subject, setSubject] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+    const [nameError, setNameError] = useState();
+    const [subjectError, setSubjectError] = useState();
+    const [emailError, setEmailError] = useState();
+    const [messageError, setMessageError] = useState();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        emailjs.sendForm('service_yy49ssl', 'template_4p7j7bj', form.current, 'M2zBgsbvSJrGg-zHj')
+        const formattedPhone = phone ? formatPhoneNumberIntl(phone) : '';
+        const formData = {
+            ...data,
+            user_phone: formattedPhone,
+            user_name : name,
+            user_email: email,
+            user_subject : subject,
+        };
+
+        emailjs.send('service_yy49ssl', 'template_4p7j7bj', formData, 'M2zBgsbvSJrGg-zHj')
             .then(
                 () => {
                     console.log('SUCCESS!');
@@ -144,9 +143,13 @@ const Contact = () => {
     };
 
     useEffect(() => {
+        validateName({ name, setNameError });
+        validateSubject({ subject, setSubjectError });
+        validateEmail({ email, setEmailError });
+        validateMessage({ message, setMessageError });
         const navbarHeight = navbarRef.current.getBoundingClientRect().height;
         heroRef.current.style.minHeight = `calc(100vh - ${navbarHeight}px)`;
-    }, []);
+    }, [name, subject, email, phone, message]);
 
     return (
         <>
@@ -162,124 +165,62 @@ const Contact = () => {
                         <div className="form-div">
                             <label>Name</label>
                             <input
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
                                 type="text"
                                 name="user_name"
                                 placeholder="Name"
-                                {...register("user_name", {
-                                    required: {
-                                        value: true,
-                                        message: "Name is required",
-                                    },
-                                    maxLength: {
-                                        value: 100,
-                                        message: "Too long (max 100 characters)",
-                                    },
-                                    minLength: {
-                                        value: 3,
-                                        message: "Too short (min 3 characters)",
-                                    },
-                                })}
                             />
-                            {errors.user_name && (
-                                <span className="error">
-                                    {errors.user_name.message}
-                                </span>
-                            )}
+                            {nameError && <InlineError error={nameError} />}
                             <label>Subject</label>
                             <input
                                 type="text"
                                 name="user_subject"
                                 placeholder="Subject"
-                                {...register("user_subject", {
-                                    required: {
-                                        value: true,
-                                        message: "Subject is required",
-                                    },
-                                    maxLength: {
-                                        value: 100,
-                                        message: "Too long (max 100 characters)",
-                                    },
-                                    minLength: {
-                                        value: 3,
-                                        message: "Too short (min 3 characters)",
-                                    },
-                                })}
+                                value={subject}
+                                onChange={(e) => setSubject(e.target.value)}
+                                required
                             />
-                            {errors.user_subject && (
-                                <span className="error">
-                                    {errors.user_subject.message}
-                                </span>
-                            )}
+                            {subjectError && <InlineError error={subjectError} />}
                             <label>Email</label>
                             <input
                                 type="email"
                                 name="user_email"
-                                placeholder="example@gmail.com"
-                                {...register("user_email", {
-                                    required: {
-                                        value: true,
-                                        message: "Email is required",
-                                    },
-                                    pattern: {
-                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                        message: "Invalid email address",
-                                    },
-                                })}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
-                            {errors.user_email && (
-                                <span className="error">
-                                    {errors.user_email.message}
-                                </span>
-                            )}
+                            {emailError && <InlineError error={emailError} />}
                             <label>Phone</label>
                             <PhoneInputWrapper>
-                                <select {...register("country", { required: true })}>
-                                    <option value="Tunisia">Tunisia</option>
-                                    <option value="France">France</option>
-                                    <option value="Italy">Italy</option>
-                                </select>
-                                <div className="country-code">+216</div>
-                                <input
-                                    type="text"
+                                <PhoneInput
+                                    className="phoneInput"
                                     name="user_phone"
-                                    placeholder="Phone number"
-                                    {...register("user_phone", {
-                                        required: {
-                                            value: true,
-                                            message: "Phone is required",
-                                        },
-                                        pattern: {
-                                            value: /^\d{8}$/,
-                                            message: "Invalid phone number",
-                                        },
-                                    })}
+                                    defaultCountry="TN"
+                                    value={phone}
+                                    onChange={(value) => setPhone(value)}
+                                    inputProps={{ required: true }}
                                 />
                             </PhoneInputWrapper>
-                            {errors.user_phone && (
-                                <span className="error">
-                                    {errors.user_phone.message}
-                                </span>
-                            )}
+                            <span className={phone && isPossiblePhoneNumber(phone) ? "valid" : "error"}>
+                                Is this number possible: {phone && isPossiblePhoneNumber(phone) ? "Yes, it is" : "No"}
+                            </span>
+                            <span className={phone && isValidPhoneNumber(phone) ? "valid" : "error"}>
+                                Is this number VALID in this country: {phone && isValidPhoneNumber(phone) ? "Yes, it is" : "No"}
+                            </span>
+                            <span className="valid">
+                                International phone number: {phone && formatPhoneNumberIntl(phone)}
+                            </span>
                             <label>Message</label>
                             <textarea
                                 name="message"
                                 placeholder="How can we help you?"
-                                {...register("message", {
-                                    required: {
-                                        value: true,
-                                        message: "Message is required",
-                                    },
-                                    maxLength: {
-                                        value: 500,
-                                        message: "Too long (max 500 characters)",
-                                    },
-                                })}
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                required
                             />
-                            {errors.message && (
-                                <span className="error">
-                                    {errors.message.message}
-                                </span>
-                            )}
+                            {messageError && <InlineError error={messageError} />}
                         </div>
                         <button type="submit">Submit</button>
                     </form>
