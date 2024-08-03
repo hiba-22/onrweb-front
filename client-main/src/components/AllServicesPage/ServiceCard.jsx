@@ -34,34 +34,33 @@ const ServiceCard = ({ service }) => {
           {/*<div className="logo">
             <span>{Service.titre.charAt(0)}</span>
             </div>*/}
-          <div className="right">
-            <h4 className="company">- {service?.titre}</h4>
+            <div className="right">
+              <h4 className="company">- {service?.titre}</h4>
+            </div>
           </div>
-          
-
-        </div>
-        <div className="location" title="Last Date">
-            <span className="" dangerouslySetInnerHTML={{ __html: service?.description }}/>
-            
+          <div className="location" title="Last Date">
+              <span className="" dangerouslySetInnerHTML={{ __html: service?.description }}/>
+              
           </div>
-        {user?._id === service?.createdBy && (
-          <div className="status capitalize">
-            <TbTargetArrow className="mr-2 text-lg" />
-            <span className={service?.isPublished ? "published" : "draft"}>
-              {service?.isPublished ? "Published" : "Draft"}
-            </span>
-          </div>
-          )}
-        </div>
-        <div className="end-row">
-          <Link to={`/service/${service._id}`} className="detail-btn">
-            details
-          </Link>
           {user?._id === service?.createdBy && (
-            <Link to={`/dashboard/edit-service/${service._id}`} className="detail-btn">
-              edit
-            </Link>
-          )}
+            <div className="status capitalize">
+              <TbTargetArrow className="mr-2 text-lg" />
+              <span className={service?.isPublished ? "published" : "draft"}>
+                {service?.isPublished ? "Published" : "Draft"}
+              </span>
+            </div>
+            )}
+        
+            <div className="end-row">
+              <Link to={`/service/${service._id}`} className="detail-btn">
+                details
+              </Link>
+              {user?._id === service?.createdBy && (
+                <Link to={`/dashboard/edit-service/${service._id}`} className="detail-btn">
+                  edit
+                </Link>
+              )}
+            </div>
         </div>
       </div>
     </Wrapper>

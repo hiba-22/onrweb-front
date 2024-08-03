@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserContext } from "./context/UserContext";
 import axios from "axios";
 
+
 axios.defaults.withCredentials = true;
 
 // Create a client

@@ -11,10 +11,9 @@ import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber, isPossiblePhoneN
 const ContactWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     
-
-    .text-content {
+    .text-c{
         flex: 1;
         padding: 50px;
 
@@ -31,8 +30,39 @@ const ContactWrapper = styled.div`
             margin-top: 20px;
             font-size: 1rem;
         }
+      
     }
+    .text-content {
+        flex: 1;
+       
 
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        iframe{
+            margin-top: 50px;
+            font-size: 1rem;
+            width: 650px;
+            height: 450px;
+        }
+    }
+    .frame{
+    padding-left: 40px;
+    padding-right: 40px;
+    }
+    .fancy {
+        color: var(--color-primary);
+    }
     .form-div {
         display: flex;
         flex-direction: column;
@@ -156,11 +186,17 @@ const Contact = () => {
             <Navbar navbarRef={navbarRef} />
             <ContactWrapper ref={heroRef}>
                 <div className="text-content">
+                    <div className="text-c">
                     <h1><strong>You have a project ?</strong></h1>
-                    <h2>Contact us</h2>
+                    <h1><span className="fancy">Contact us</span></h1>
                     <p>Send us a message and we'll get back to you as soon as possible.</p>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5253.910108427141!2d2.546822!3d48.820919!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60e78333cac9b%3A0x41087316aadd9964!2s32%20Rue%20des%20Perroquets%2C%2094350%20Villiers-sur-Marne!5e0!3m2!1sfr!2sfr!4v1722550899530!5m2!1sfr!2sfr"></iframe>
+                    </div>
+                    
+                    <div className="frame">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5253.910108427141!2d2.546822!3d48.820919!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60e78333cac9b%3A0x41087316aadd9964!2s32%20Rue%20des%20Perroquets%2C%2094350%20Villiers-sur-Marne!5e0!3m2!1sfr!2sfr!4v1722550899530!5m2!1sfr!2sfr"></iframe>
+                    </div>
                 </div>
+                
                 <div className="form-content">
                     <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-div">
