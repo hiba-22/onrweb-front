@@ -77,7 +77,7 @@ const Wrapper = styled.div`
   }
   .image-container {
     width: 100%;
-    max-width: 300px; /* Largeur maximale pour l'image */
+    
     height: 200px; /* Hauteur fixe pour l'image */
     margin-bottom: 1rem;
     overflow: hidden;

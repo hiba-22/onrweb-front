@@ -27,26 +27,23 @@ const ArticleCard = ({ article }) => {
             />
           </div>
         )}
-      
+
         <div className="middle-row">
           <div className="location" title="Last Date">
-            <span className=""> {new Date(article?.publishedAt).toLocaleDateString()}</span>
+            <span className="">{new Date(article?.publishedAt).toLocaleDateString()}</span>
           </div>
           <div className="card-header">
-          {/*<div className="logo">
-            <span>{article.titre.charAt(0)}</span>
-            </div>*/}
-          <div className="right">
-            <h4 className="company">- {article?.titre}</h4>
+            <div className="right">
+              <h4 className="company">- {article?.titre}</h4>
+            </div>
           </div>
-        </div>
-        {user?._id === article?.createdBy && (
-          <div className="status capitalize">
-            <TbTargetArrow className="mr-2 text-lg" />
-            <span className={article?.isPublished ? "published" : "draft"}>
-              {article?.isPublished ? "Published" : "Draft"}
-            </span>
-          </div>
+          {user?._id === article?.createdBy && (
+            <div className="status capitalize">
+              <TbTargetArrow className="mr-2 text-lg" />
+              <span className={article?.isPublished ? "published" : "draft"}>
+                {article?.isPublished ? "Published" : "Draft"}
+              </span>
+            </div>
           )}
         </div>
         <div className="end-row">
@@ -63,6 +60,7 @@ const ArticleCard = ({ article }) => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -75,32 +73,20 @@ const Wrapper = styled.div`
   }
   .image-container {
     width: 100%;
-    height: auto;
+    max-width: 300px; /* Largeur maximale pour l'image */
+    height: 200px; /* Hauteur fixe pour l'image */
     margin-bottom: 1rem;
+    overflow: hidden;
   }
   .article-image {
     width: 100%;
-    height: auto;
-    border-radius: 4px;
+    height: 100%;
+    object-fit: cover; /* Fait en sorte que l'image remplisse le conteneur tout en conservant son rapport d'aspect */
   }
   .card-container .card-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  }
-  .card-container .logo {
-    margin-right: 18px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #5095f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-white);
-    font-size: 30px;
-    font-weight: 700;
-    text-transform: uppercase;
   }
   .right .title {
     text-transform: capitalize;
