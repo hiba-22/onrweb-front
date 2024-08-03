@@ -119,10 +119,12 @@ const JobCard = ({ job }) => {
             <BsFillBriefcaseFill className="mr-2 text-lg" />
             <span className="capitalize">{job?.jobType}</span>
           </div>
+          {user?._id === job?.createdBy && (
           <div className="status capitalize">
             <TbTargetArrow className="mr-2 text-lg" />
             <span className={job?.jobStatus}>{job?.jobStatus}</span>
           </div>
+          )}
         </div>
         <div className="end-row">
         {user?._id === job?.createdBy && (
