@@ -76,17 +76,16 @@ const Wrapper = styled.div`
     background-image: linear-gradient(to right bottom, #eee 0%, #f0f0f0 100%);
   }
   .image-container {
-    width: 150px; /* Fixe la largeur du conteneur d'image */
-    height: 150px; /* Fixe la hauteur du conteneur d'image */
-    border-radius: 50%; /* Rend le conteneur circulaire */
-    overflow: hidden; /* Coupe l'image pour qu'elle ne dépasse pas du conteneur */
-    margin: 0 auto 1rem; /* Centre le conteneur d'image horizontalement */
+    width: 100%;
+    max-width: 300px; /* Largeur maximale pour l'image */
+    height: 200px; /* Hauteur fixe pour l'image */
+    margin-bottom: 1rem;
+    overflow: hidden;
   }
   .Service-image {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Fait en sorte que l'image remplisse le conteneur tout en conservant son rapport d'aspect */
-    border-radius: 50%; /* Rend l'image circulaire */
   }
   .card-container .card-header {
     display: flex;
