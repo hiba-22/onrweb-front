@@ -31,16 +31,12 @@ const ServiceCard = ({ service }) => {
         <div className="middle-row">
           
           <div className="card-header">
-          {/*<div className="logo">
-            <span>{Service.titre.charAt(0)}</span>
-            </div>*/}
             <div className="right">
               <h4 className="company">- {service?.titre}</h4>
             </div>
           </div>
           <div className="location" title="Last Date">
-              <span className="" dangerouslySetInnerHTML={{ __html: service?.description }}/>
-              
+            <span className="" dangerouslySetInnerHTML={{ __html: service?.description }}/>
           </div>
           {user?._id === service?.createdBy && (
             <div className="status capitalize">
@@ -49,23 +45,24 @@ const ServiceCard = ({ service }) => {
                 {service?.isPublished ? "Published" : "Draft"}
               </span>
             </div>
-            )}
+          )}
         
-            <div className="end-row">
-              <Link to={`/service/${service._id}`} className="detail-btn">
-                details
+          <div className="end-row">
+            <Link to={`/service/${service._id}`} className="detail-btn">
+              details
+            </Link>
+            {user?._id === service?.createdBy && (
+              <Link to={`/dashboard/edit-service/${service._id}`} className="detail-btn">
+                edit
               </Link>
-              {user?._id === service?.createdBy && (
-                <Link to={`/dashboard/edit-service/${service._id}`} className="detail-btn">
-                  edit
-                </Link>
-              )}
-            </div>
+            )}
+          </div>
         </div>
       </div>
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -74,40 +71,27 @@ const Wrapper = styled.div`
     height: 100%;
     box-shadow: 0 4px 4px var(--shadow-medium), 0 -2px 6px var(--shadow-medium);
     border-radius: 4px;
-   
   }
   .card-container:hover {
     background-image: linear-gradient(to right bottom, #eee 0%, #f0f0f0 100%);
   }
   .image-container {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-    
+    width: 150px; /* Fixe la largeur du conteneur d'image */
+    height: 150px; /* Fixe la hauteur du conteneur d'image */
+    border-radius: 50%; /* Rend le conteneur circulaire */
+    overflow: hidden; /* Coupe l'image pour qu'elle ne dépasse pas du conteneur */
+    margin: 0 auto 1rem; /* Centre le conteneur d'image horizontalement */
   }
   .Service-image {
     width: 100%;
-    height: auto;
-    border-radius: 4px;
+    height: 100%;
+    object-fit: cover; /* Fait en sorte que l'image remplisse le conteneur tout en conservant son rapport d'aspect */
+    border-radius: 50%; /* Rend l'image circulaire */
   }
   .card-container .card-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  }
-  .card-container .logo {
-    margin-right: 18px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #5095f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-white);
-    font-size: 30px;
-    font-weight: 700;
-    text-transform: uppercase;
   }
   .right .title {
     text-transform: capitalize;
