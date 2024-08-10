@@ -4,12 +4,14 @@ import styled from "styled-components";
 import DashboardNavLinks from "./DashboardNavLinks";
 import { useDashboardContext } from "../../Layout/DashboardLayout";
 import { useUserContext } from "../../context/UserContext";
+import useThemeDash from "../../context/ThemeDash"; 
 
 const LargeSidebar = () => {
+    const { themeDashMode } = useThemeDash();
     const { user } = useUserContext();
     const { showSidebar } = useDashboardContext();
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' } >
             <div
                 className={
                     !showSidebar
@@ -42,7 +44,19 @@ const Wrapper = styled.aside`
         flex-direction: column;
         align-items: center;
     }
-
+    &.dark {
+        background-color: #1a2330;
+        color: #f9fafb;
+        box-shadow: 2px 0px 0 0 rgb(58 148 210 / 56%);
+        .start .toggler {
+            
+            color: var(--color-primary);
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid var(--color-primary);
+            
+        }
+    }
     @media (min-width: 992px) {
         display: block;
         box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);

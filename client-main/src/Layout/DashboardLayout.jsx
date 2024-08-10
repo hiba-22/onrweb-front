@@ -6,10 +6,12 @@ import { SmallSidebar, LargeSidebar, DashboardNavbar } from "../components";
 import Swal from "sweetalert2";
 import { useUserContext } from "../context/UserContext";
 import axios from "axios";
+import useThemeDash from "../context/ThemeDash"; 
 
 const DashboardContext = createContext();
 
 const DashboardLayout = () => {
+    const { themeDashMode } = useThemeDash();
     const { handleFetchMe, user } = useUserContext();
     const [showSidebar, setShowSidebar] = useState(false);
 
@@ -38,7 +40,7 @@ const DashboardLayout = () => {
     const values = { handleLogout, showSidebar, setShowSidebar };
     return (
         <DashboardContext.Provider value={values}>
-            <Wrapper>
+            <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
                 <main className="dashboard">
                     <SmallSidebar />
                     <LargeSidebar />

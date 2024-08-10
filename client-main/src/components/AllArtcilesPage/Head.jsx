@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import styled from "styled-components";
-import { CiSearch } from "react-icons/ci";
 import { useArticleContext } from "../../context/ArticleContext";
 const Landing = () => {
     const { handleArticleFetch } = useArticleContext();

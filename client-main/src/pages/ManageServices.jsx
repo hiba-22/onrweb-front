@@ -9,8 +9,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import LoadingComTwo from "../components/shared/LoadingComTwo";
+import useThemeDash from "../context/ThemeDash";
 
 const ManageServices = () => {
+  const { themeDashMode } = useThemeDash();
   const {
     isPending,
     isError,
@@ -18,10 +20,10 @@ const ManageServices = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["my-services"],
+    queryKey: ["my-Services"],
     queryFn: () =>
       axios
-        .get(`https://onr-backend.vercel.app/api/v1/services/my-services`, {
+        .get(`https://onr-backend.vercel.app/api/v1/Services/my-Services`, {
           withCredentials: true,
         })
         .then((response) => response.data),
@@ -45,7 +47,7 @@ const ManageServices = () => {
 
   const deleteServiceHandler = async (id) => {
     try {
-      await axios.delete(`https://onr-backend.vercel.app/api/v1/services/${id}`, {
+      await axios.delete(`https://onr-backend.vercel.app/api/v1/Services/${id}`, {
         withCredentials: true,
       });
 
@@ -86,7 +88,7 @@ const ManageServices = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
       <div className="title-row">
         Manage Services <CiSquarePlus className="ml-1 text-xl md:text-2xl" />
       </div>
@@ -136,6 +138,7 @@ const ManageServices = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.section`
   .title-row {
     display: flex;
@@ -170,7 +173,7 @@ const Wrapper = styled.section`
     border-radius: 8px;
   }
   .table thead {
-    background-color: var(--color-accent);
+    background-color: #247bf7b8;
     color: var(--color-white);
     font-size: 14px;
     letter-spacing: 1px;
@@ -211,6 +214,12 @@ const Wrapper = styled.section`
   .action.delete {
     color: #f1322f;
   }
+  &.dark {
+    background-color: #1f2937;
+    .title-row{
+      color: #cccfd3;
+  }
+}
 `;
 
 export default ManageServices;

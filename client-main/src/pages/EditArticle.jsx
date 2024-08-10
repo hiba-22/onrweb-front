@@ -12,10 +12,12 @@ import LoadingComTwo from "../components/shared/LoadingComTwo";
 import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import useThemeDash from "../context/ThemeDash";
 
 const queryClient = new QueryClient();
 
 const EditArticle = () => {
+    const { themeDashMode } = useThemeDash();
     const { id } = useParams();
     const { isPending, isError, data: article, error } = useQuery({
         queryKey: ["updateArticle"],
@@ -132,7 +134,7 @@ const EditArticle = () => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Update Article
@@ -333,6 +335,7 @@ const EditArticle = () => {
                             <div className="row mt-5">
                                 <label htmlFor="images">Images</label>
                                 <input
+                                    className="img"
                                     type="file"
                                     id="images"
                                     name="images"
@@ -555,5 +558,22 @@ const Wrapper = styled.section`
     .current-image {
         max-width: 100px;
         height: auto;
+    }
+    &.dark {
+        background-color: #1f2937;
+        
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+            color: var( --color-black);
+        }
     }
 `;

@@ -56,12 +56,12 @@ const Wrapper = styled.div`
         font-weight: 500;
         color: #000;
         padding: 1px 8px;
-        border: 1px solid var(--color-accent);
+        border: 1px solid var(--color-primary);
         border-radius: 3px;
     }
     .job-list .active {
-        border: 1px solid var(--color-accent);
-        background-color: var(--color-accent);
+        border: 1px solid var(--color-primary);
+        background-color: var(--color-primary);
         color: var(--color-white);
     }
     .job-list .disabled-item {

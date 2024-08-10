@@ -5,11 +5,12 @@ import photo from "../assets/media/LandingPage/hero.png";
 import Navbar from "../components/shared/Navbar";
 import PopularCategory from "../components/Home Page/PopularCategory";
 import HowWorks from "../components/Home Page/HowWorks";
-import Team from "../components/Home Page/Team";
 import Brands from "../components/Home Page/Brands";
 import Testimonial from "../components/Home Page/Testimonial";
+import useTheme from "../context/Theme";
 
 const Landing = () => {
+    const { themeMode } = useTheme();
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
 
@@ -20,7 +21,7 @@ const Landing = () => {
     return (
         <>
             <Navbar navbarRef={navbarRef} />
-            <Wrapper ref={heroRef}>
+            <Wrapper ref={heroRef}  className={themeMode === 'dark' ? 'dark' : '' }>
                 <div className="hero-content">
                     <div className="text-content">
                         <h1> We Make   <span className="fancy">Creativity Work </span> 
@@ -34,7 +35,7 @@ const Landing = () => {
                         <p>
                             We regularly recruit and integrate partners into our international ecosystem.
                             <br></br>
-                            Free application: <b>recruitment@Onrtech.com</b>
+                            Free application: <strong><NavLink link="mailto:Contact@Onrtech.fr" label="Contact@Onrtech.Fr" /></strong>
                         </p>
                         <div className="btn-grp">
                             <Link className="btn" to="/all-jobs">
@@ -50,15 +51,25 @@ const Landing = () => {
                  
                 </div>
             </Wrapper>
-            <div>
+            <div className="dark:bg-[#1f2937]">
             <PopularCategory/>
             <HowWorks/>
-            <Team/>
             <Testimonial/>
             <Brands/>
             </div>
         </>
     );
 };
+const NavLink = ({ link, label }) => (
+    
+      <a
+        href={link}
+        className="hover:text-gray-800 dark:hover:text-gray-200"
+      >
+        {label}
+      </a>
+   
+  );
+  
 
 export default Landing;

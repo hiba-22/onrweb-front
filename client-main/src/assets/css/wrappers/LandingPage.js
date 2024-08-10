@@ -6,9 +6,9 @@ const Wrapper = styled.div`
     align-items: center;
     /* min-height: 100vh; */
     width: 100%;
-    max-width: 1250px;
+
     margin: 0 auto;
-    padding: calc(1.5rem + 1.5vh) calc(1.2rem + 1.75vw);
+    padding: calc(1.5rem + 1.5vh) calc(8rem + 1.75vw);
 
     .hero-content {
         width: 100%;
@@ -48,15 +48,15 @@ const Wrapper = styled.div`
         font-weight: 400;
         font-size: calc(1rem + 0.2vw);
         color: var(--color-white);
-        background-color: var(--color-primary);
+        background-color: #007bff;
         border: 1px solid var(--color-primary);
         padding: calc(5px + 0.15vw) calc(15px + 0.3vw);
         border-radius: 6px;
         transition: all 0.3s ease-in;
     }
     .btn:hover {
-        background-color: var(--color-secondary);
-        box-shadow: var(--shadow-1);
+        background-color: #0069d9;
+        box-shadow: 0 0 0 2px #3498db;
     }
     .placeholder {
         display: flex;
@@ -87,6 +87,10 @@ const Wrapper = styled.div`
             margin-top: 1.5rem;
             margin-bottom: 2.2rem;
         }
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
     }
 `;
 

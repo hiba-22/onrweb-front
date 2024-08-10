@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
+import LogoLight from "../components/Logo-ligth";
 import { useNavigate,useParams } from "react-router-dom";
-
+import useTheme from "../context/Theme";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 const ResetPassword = () => {
+    const { themeMode } = useTheme();
     const {
         register,
         handleSubmit,
@@ -72,10 +74,10 @@ const ResetPassword = () => {
     }, [isPasswordMatched.status]);
 
     return (
-        <Wrapper>
+        <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
             <div className="container">
                 <div className="flex justify-center">
-                    <Logo />
+                    {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
                 <h1>Reset Your Password</h1>
                 {!isPasswordMatched?.status && (
@@ -212,12 +214,12 @@ const Wrapper = styled.div`
     }
 
     button {
-        width: 50%;
+       
         min-width: 100px;
         padding: 8px;
         font-size: 16px;
         letter-spacing: 1px;
-        background: var(--color-accent);
+        background: #007bff;
         color: var(--color-white);
         border: none;
         border-radius: 6px;
@@ -227,7 +229,8 @@ const Wrapper = styled.div`
     }
 
     button:hover {
-        background: var(--color-primary);
+        background:  #0069d9;
+        box-shadow: 0 0 0 2px #3498db;
     }
     button:disabled {
         background: var(--color-gray);
@@ -242,6 +245,23 @@ const Wrapper = styled.div`
         }
         form {
             padding: 0 20px;
+        }
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        
+        .container {
+            background: #374151;
+            border-color: #4b556;
+        }
+        .row label {
+            
+            color: var( --color-white);
+           
+        }
+        .row input {
+            color:var( --color-black);
         }
     }
 `;

@@ -7,7 +7,7 @@ import { validateEmail, validateMessage, validateName, validateSubject } from ".
 import InlineError from "../utils/InlineError";
 import 'react-phone-number-input/style.css'
 import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber, isPossiblePhoneNumber } from 'react-phone-number-input';
-
+import useTheme from "../context/Theme";
 const ContactWrapper = styled.div`
     display: flex;
     justify-content: space-between;
@@ -111,11 +111,15 @@ const ContactWrapper = styled.div`
         }
 
         .valid {
-            color: #51b851d9;
+            color: #00ff00d9;
             font-size: 0.8rem;
             margin-top: -15px;
             margin-bottom: 15px;
         }
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
     }
 `;
 
@@ -135,6 +139,7 @@ const PhoneInputWrapper = styled.div`
 `;
 
 const Contact = () => {
+    const { themeMode } = useTheme();
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
     const form = useRef();
@@ -184,7 +189,7 @@ const Contact = () => {
     return (
         <>
             <Navbar navbarRef={navbarRef} />
-            <ContactWrapper ref={heroRef}>
+            <ContactWrapper ref={heroRef} className={themeMode === 'dark' ? 'dark' : '' }>
                 <div className="text-content">
                     <div className="text-c">
                     <h1><strong>You have a project ?</strong></h1>

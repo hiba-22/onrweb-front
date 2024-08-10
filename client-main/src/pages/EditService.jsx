@@ -12,15 +12,17 @@ import LoadingComTwo from "../components/shared/LoadingComTwo";
 import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import useThemeDash from "../context/ThemeDash";
 
 const queryClient = new QueryClient();
 
 const EditService = () => {
+    const { themeDashMode } = useThemeDash();
     const { id } = useParams();
     const { isPending, isError, data: service, error } = useQuery({
         queryKey: ["updateService"],
         queryFn: () =>
-            getSingleHandler(`https://onr-backend.vercel.app/api/v1/services/${id}`),
+            getSingleHandler(`https://onr-backend.vercel.app/api/v1/Services/${id}`),
     });
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -47,7 +49,7 @@ const EditService = () => {
     const updateServiceMutation = useMutation({
         mutationFn: async (formData) => {
             const response = await axios.put(
-                `https://onr-backend.vercel.app/api/v1/services/${id}`,
+                `https://onr-backend.vercel.app/api/v1/Services/${id}`,
                 formData,
                 {
                     headers: {
@@ -142,7 +144,7 @@ const EditService = () => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Update Service
@@ -374,6 +376,7 @@ const EditService = () => {
                             <div className="row mt-5">
                                 <label htmlFor="images">Images</label>
                                 <input
+                                className="img"
                                     type="file"
                                     id="images"
                                     name="images"
@@ -596,5 +599,22 @@ const Wrapper = styled.section`
     .current-image {
         max-width: 100px;
         height: auto;
+    }
+    &.dark {
+        background-color: #1f2937;
+        
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+            color: var( --color-black);
+        }
     }
 `;

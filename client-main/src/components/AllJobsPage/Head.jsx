@@ -55,7 +55,7 @@ max-width: 1250px;
 margin: 0 auto;
 padding: calc(1.5rem + 1.5vh) calc(1.2rem + 1.75vw);
 .hero-content {
-    width: 100%;
+    
     display: grid;
     grid-template-columns: minmax(auto, 600px) minmax(auto, 450px);
     justify-content: space-between;
@@ -93,5 +93,6 @@ p {
         margin-bottom: 2.2rem;
     }
 }
+
 `
 export default Landing;

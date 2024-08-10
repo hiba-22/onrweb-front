@@ -4,11 +4,14 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import Logo from "../Logo";
 import { useDashboardContext } from "../../Layout/DashboardLayout";
-
+import ThemeBtn from "../DarkMode/ThemeBtnDashboard";
+import useThemeDash from "../../context/ThemeDash"; 
+import LogoLight from "../Logo-ligth";
 const DashboardNavbar = () => {
+    const { themeDashMode } = useThemeDash();
     const { showSidebar, setShowSidebar, handleLogout } = useDashboardContext();
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' } >
             <div className="nav-container">
                 <div className="start">
                     <button
@@ -19,14 +22,16 @@ const DashboardNavbar = () => {
                     </button>
                 </div>
                 <div className="center">
-                    <Logo />
+                    {themeDashMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
                 <div className="end">
                     <button className="logout" onClick={handleLogout}>
                         <FiLogOut className="text-lg mr-1" /> logout
                     </button>
                 </div>
+                
             </div>
+            <ThemeBtn/>
         </Wrapper>
     );
 };
@@ -40,6 +45,20 @@ const Wrapper = styled.nav`
     padding: 1rem calc(1rem + 0.7vw);
     background-color: var(--color-white);
     z-index: 1;
+    &.dark {
+        background-color: #1a2330;
+        color: #f9fafb;
+        box-shadow: 0px 2px 0 0 rgb(58 148 210 / 56%);
+        .start .toggler {
+            
+            color: var(--color-primary);
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid var(--color-primary);
+            
+        }
+       
+    }
 
     .nav-container {
         width: 100%;

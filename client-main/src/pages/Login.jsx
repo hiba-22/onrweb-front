@@ -3,7 +3,8 @@ import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import LogoLight from "../components/Logo-ligth";
+import useTheme from "../context/Theme";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -11,7 +12,9 @@ import { useUserContext } from "../context/UserContext";
 import {GoogleLogin} from "react-google-login";
 import { gapi } from 'gapi-script'
 
+
 const Login = () => {
+    const { themeMode } = useTheme();
     const { handleFetchMe } = useUserContext();
     const {
         register,
@@ -96,10 +99,10 @@ const Login = () => {
    
    }
     return (
-        <Wrapper>
+        <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
             <div className="container">
                 <div className="flex justify-center">
-                    <Logo />
+                    {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
                 <h1>Login</h1>
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -248,7 +251,7 @@ const Wrapper = styled.div`
         padding: 8px;
         font-size: 16px;
         letter-spacing: 1px;
-        background: var(--color-accent);
+        background: #007bff;
         color: var(--color-white);
         border: none;
         border-radius: 6px;
@@ -258,7 +261,8 @@ const Wrapper = styled.div`
     }
 
     button:hover {
-        background: var(--color-primary);
+        background:  #0069d9;
+        box-shadow: 0 0 0 2px #3498db;
     }
     button:disabled {
         background: var(--color-gray);
@@ -281,6 +285,40 @@ const Wrapper = styled.div`
     }
     p .link:hover {
         text-decoration: underline;
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        
+        .container {
+            background: #374151;
+            border-color: #4b556;
+        }
+        .row label {
+            
+            color: var( --color-white);
+           
+        }
+        .row input {
+            color:var( --color-black);
+        }
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        
+        .container {
+            background: #374151;
+            border-color: #4b556;
+        }
+        .row label {
+            
+            color: var( --color-white);
+           
+        }
+        .row input {
+            color:var( --color-black);
+        }
     }
 `;
 

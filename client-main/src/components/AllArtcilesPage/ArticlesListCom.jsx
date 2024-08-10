@@ -2,9 +2,11 @@ import React from "react";
 import { useArticleContext } from "../../context/ArticleContext";
 import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
-import JobCard from "./ArticleCard";
+import ArticleCard from "./ArticleCard";
 import { useUserContext } from "../../context/UserContext";
-const JobsListCom = () => {
+import useTheme from "../../context/Theme"
+const ArticlesListCom = () => {
+  const { themeMode } = useTheme();
   const { articleLoading, articles } = useArticleContext();
   const { user } = useUserContext();
   if (articleLoading) {
@@ -34,8 +36,8 @@ const JobsListCom = () => {
     user?.role === "recruiter" ? totalRecruiterArticles : totalPublishedArticles;
 
   return (
-    <Wrapper> 
-      <h5 className="job-count">
+    <Wrapper className={themeMode === 'dark' ? 'dark' : '' }> 
+      <h5 className="Article-count">
         {user?.role === "recruiter" ? (
           <>
             Shows{" "}
@@ -70,24 +72,29 @@ const JobsListCom = () => {
 
       <div className="list-container">
         {articles?.result?.map((article) => (
-          <JobCard key={article._id} article={article} />
+          <ArticleCard key={article._id} article={article} />
         ))}
       </div>
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   background-color: var(--color-gray);
   width: 100%;
   margin-top: 1.5rem;
-  .job-count {
+  padding: 1.2rem 1rem;
+  border-radius: 6px;
+  max-width: 1152px;
+  margin-left: 130px;
+  .Article-count {
     margin-top: 14px;
     font-size: 11px;
     font-weight: 600;
     color: var(--color-black);
     opacity: 0.8;
   }
-  .job-count .fancy {
+  .Article-count .fancy {
     color: var(--color-primary);
     margin: 0 5px;
     font-size: 13px;
@@ -118,6 +125,13 @@ const Wrapper = styled.div`
       justify-content: center;
     }
   }
+  &.dark {
+    background-color: #1f2937;
+    color: #f9fafb;
+    .Article-count {
+        color: var(--color-white);  
+    }
+}
 `;
 
-export default JobsListCom;
+export default ArticlesListCom;

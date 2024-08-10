@@ -10,17 +10,18 @@ import styled from "styled-components";
 import avatar from "../assets/media/avatar.jpg";
 
 import { useUserContext } from "../context/UserContext";
-
+import useThemeDash from "../context/ThemeDash"; 
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import dayjs from "dayjs";
 dayjs.extend(advancedFormat);
 
 const Profile = () => {
+    const { themeDashMode } = useThemeDash();
     const { user } = useUserContext();
     const date = dayjs(user?.createdAt).format("MMM Do, YYYY");
 
     return (
-        <Wrapper>
+        <Wrapper  className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="wrapper">
                 <h5 className="title">Informations</h5>
                 <div className="profile-container">
@@ -70,7 +71,7 @@ const Profile = () => {
                             </tr>
                             <tr className="row">
                                 <td className="info">Gender :</td>
-                                <td className="value">Male</td>
+                                <td className="value">{user?.gender || "not available"}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,7 +100,19 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
     gap: 30px;
-
+    &.dark {
+        .wrapper { box-shadow: 2px 2px 4px rgb(255 255 255 / 10%), -2px -2px 4px rgb(255 255 255 / 10%);}
+       td{
+        color: #cccfd3;
+       }
+       td.value{
+        color: #f9fafb;
+       }
+       .title {
+        color: #cccfd3;
+       }
+        
+    }
     .wrapper {
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1),
             -2px -2px 4px rgba(0, 0, 0, 0.1);
@@ -191,6 +204,7 @@ const Wrapper = styled.section`
             width: 60%;
         }
     }
+    
 `;
 
 export default Profile;

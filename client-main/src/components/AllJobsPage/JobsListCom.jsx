@@ -3,8 +3,10 @@ import { useJobContext } from "../../context/JobContext";
 import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
 import JobCard from "./JobCard";
+import useTheme from "../../context/Theme";
 
 const JobsListCom = () => {
+    const { themeMode } = useTheme();
     const { jobLoading, jobs } = useJobContext();
 
     if (jobLoading) {
@@ -19,7 +21,7 @@ const JobsListCom = () => {
         );
     }
     return (
-        <Wrapper>
+        <Wrapper  className={themeMode === 'dark' ? 'dark' : '' }>
             <h5 className="job-count">
                 Shows
                 <span className="fancy">
@@ -49,6 +51,10 @@ const Wrapper = styled.div`
     background-color: var(--color-gray);
     width: 100%;
     margin-top: 1.5rem;
+    padding: 1.2rem 1rem;
+    border-radius: 6px;
+    max-width: 1152px;
+    margin-left: 130px;
     .job-count {
         margin-top: 14px;
         font-size: 11px;
@@ -85,6 +91,13 @@ const Wrapper = styled.div`
             grid-template-columns: 1fr;
             grid-gap: 1.5rem;
             justify-content: center;
+        }
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        .job-count {
+            color: var(--color-white);  
         }
     }
 `;

@@ -1,16 +1,17 @@
 import React from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import styled from "styled-components";
-
+import useThemeDash from "../context/ThemeDash";
 import { useUserContext } from "../context/UserContext";
 import Applicant from "../components/MyJobsPage/Applicant";
 import Recruiter from "../components/MyJobsPage/Recruiter";
 
 const MyJobs = () => {
+    const { themeDashMode } = useThemeDash();
     const { user } = useUserContext();
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="title-row">
                 {user?.role === "recruiter" && "Manage Applications"}
                 {user?.role === "user" && "My Applications"}
@@ -42,6 +43,12 @@ const Wrapper = styled.section`
         width: calc(30px + 0.7vw);
         height: calc(2px + 0.1vw);
         background-color: var(--color-primary);
+    }
+    &.dark {
+        background-color: #1f2937;
+        .title-row{
+          color: #cccfd3;
+      }
     }
 `;
 

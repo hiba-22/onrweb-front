@@ -8,7 +8,7 @@ import { Job_Status, Job_Type, JOB_Modality, JOB_IncomePeriod, JOB_IncomeCurrenc
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import useThemeDash from "../context/ThemeDash"; 
 // import ReactQuill from "react-quill";
 // import "react-quill/dist/quill.snow.css";
 
@@ -22,6 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { TagsInput } from "react-tag-input-component";
 
 const AddJob = () => {
+    const { themeDashMode } = useThemeDash();
     const [isLoading, setIsLoading] = useState(false);
     const [deadline, setDeadline] = useState(new Date());
     const [skills, setSkills] = useState([]);
@@ -92,7 +93,7 @@ const AddJob = () => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Create Job
@@ -641,29 +642,33 @@ const AddJob = () => {
 };
 
 const Wrapper = styled.section`
-    .title-row {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        font-size: calc(0.9rem + 0.4vw);
-        text-transform: capitalize;
-        letter-spacing: 1px;
-        font-weight: 600;
-        opacity: 0.85;
-        color: var(--color-black);
-        titre: relative;
-    }
-    .title-row:before {
-        content: "";
-        titre: absolute;
-        bottom: -4px;
-        left: 0;
-        width: calc(30px + 0.7vw);
-        height: calc(2px + 0.1vw);
-        background-color: var(--color-primary);
-    }
+.title-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: calc(0.9rem + 0.4vw);
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 600;
+    opacity: 0.85;
+    color: var(--color-black);
+    position: relative;
+}
+.title-row:before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: calc(30px + 0.7vw);
+    height: calc(2px + 0.1vw);
+    background-color: var(--color-primary);
+}
     .content-row {
         margin-top: calc(2rem + 0.5vw);
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-top: 0.5px;
     }
     .form {
         margin-top: calc(30px + 1vw);
@@ -690,7 +695,7 @@ const Wrapper = styled.section`
         width: 100%;
     }
     .row label {
-        font-size: 11.3px;
+        font-size: 14px;
         font-weight: 600;
         letter-spacing: 1px;
         color: var(--color-black);
@@ -699,6 +704,10 @@ const Wrapper = styled.section`
     input,
     select,
     textarea {
+        font-size: 1.3rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
         width: 100%;
         max-width: 500px;
         padding: 8px 14px;
@@ -730,13 +739,12 @@ const Wrapper = styled.section`
         width: 100%;
         font-size: 13px;
         padding: 5px 10px;
+        
     }
     .tag-cls {
         font-size: 14px;
     }
-    /* .rti--container {
-        border: 1px solid #00000086;
-    } */
+    
     .btn {
         width: 100%;
         max-width: 150px;
@@ -757,6 +765,29 @@ const Wrapper = styled.section`
             margin: 0 auto;
             margin-top: -6px;
         }
+    }
+  
+    
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+        }
+        .rti--container {
+            --rti-tag: #4d92d8;
+        } 
+        .content-row { box-shadow: 2px 2px 4px rgb(255 255 255 / 10%), -2px -2px 4px rgb(255 255 255 / 10%);}
+    
     }
 `;
 export default AddJob;

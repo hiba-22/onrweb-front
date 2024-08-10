@@ -8,11 +8,13 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { MdAccessTime } from "react-icons/md";
 import Navbar from "../components/shared/Navbar";
+import useTheme from "../context/Theme";
 
 dayjs.extend(advancedFormat);
 
 const Article = () => {
     const { id } = useParams();
+    const { themeMode } = useTheme();
 
     const {
         isLoading,
@@ -37,7 +39,7 @@ const Article = () => {
     return (
         <>
             <Navbar />
-            <Wrapper>
+            <Wrapper  className={themeMode === 'dark' ? 'dark' : '' }>
                 <div className="content">
                     <div className="header">
                         <h2>{article?.titre}</h2>
@@ -84,11 +86,12 @@ const Article = () => {
                         </div>
 
                        
-                        <div className="section">
-                            <h3>Exemples de références :</h3>
+                        <div className="section1">
+                            <h2>Exemples de références :</h2>
                             <ul>
                                 {article?.references?.map((ref, index) => (
-                                    <li key={index}>{ref}</li>
+                                    <li key={index}>
+                                        <strong>{ref.split(':')[0]}</strong>:{ref.split(':')[1]}</li>
                                 ))}
                             </ul>
                         </div>
@@ -101,11 +104,32 @@ const Article = () => {
 
 const Wrapper = styled.section`
     padding: 2rem;
-    max-width: 1200px;
     margin: 0 auto;
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        .content {
+            box-shadow: 2px 2px 4px rgb(254 254 254 / 61%),
+            -2px -2px 4px  rgb(255 246 246 / 68%);
+            background: #374151;
+            
+            color: #cccfd3;
+        }
+        .body{
+            color: #f9fafb;
+        }
+        .section h3 {
+            color: darkgrey;
+        }
+        .section ul li {
+            color: #ffffff
+        }
 
+    }
     .content {
         background: #fff;
+        max-width: 1150px;
+        margin-left: 8rem;
         padding: 2rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -116,13 +140,14 @@ const Wrapper = styled.section`
     }
 
     .header h2 {
+
         font-size: 2rem;
         font-weight: bold;
     }
 
     .header .date {
         font-size: 1rem;
-        color: #666;
+        color: #a4a0a0d4;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -136,12 +161,12 @@ const Wrapper = styled.section`
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        background: #f9f9f9;
+        
     }
 
     .section {
         padding: 1rem;
-        background: #f9f9f9;
+        
         border-radius: 8px;
     }
 
@@ -159,6 +184,33 @@ const Wrapper = styled.section`
     .section ul li {
         font-size: 1rem;
         margin-bottom: 0.5rem;
+    }
+    .section1 {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+
+    .section1 h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        -webkit-text-stroke-width: thin;
+    }
+    .section1 h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        -webkit-text-stroke-width: thin;
+        color: #7a7a7a;
+    }
+    .section1 ul {
+        list-style-type: disc;
+        margin-left: 2rem;
+    }
+
+    .section1 ul li {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #a4a0a0d4
     }
 
     .images {
@@ -187,10 +239,7 @@ const Wrapper = styled.section`
     }
 
     .images .image-1 {
-        max-width: 55%;
-    border-style: solid;
-    border-width: 15px 15px 15px 15px;
-    border-color: #FFFFFF;
+    max-width: 55%;
     vertical-align: middle;
     display: inline-block;
     box-shadow: none;

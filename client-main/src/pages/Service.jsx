@@ -8,10 +8,12 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { FaCheck } from "react-icons/fa";
 import Navbar from "../components/shared/Navbar";
+import useTheme from "../context/Theme";
 
 dayjs.extend(advancedFormat);
 
 const Service = () => {
+    const { themeMode } = useTheme();
     const { id } = useParams();
 
     const {
@@ -20,8 +22,8 @@ const Service = () => {
         data: service,
         error,
     } = useQuery({
-        queryKey: ["service", id],
-        queryFn: () => getSingleHandler(`https://onr-backend.vercel.app/api/v1/services/${id}`),
+        queryKey: ["Service", id],
+        queryFn: () => getSingleHandler(`https://onr-backend.vercel.app/api/v1/Services/${id}`),
     });
 
     if (isLoading) {
@@ -37,7 +39,7 @@ const Service = () => {
     return (
         <>
             <Navbar />
-            <Wrapper>
+            <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
                 <div className="content">
                     <div className="header">
                         <h2>{service?.titre}</h2>
@@ -110,12 +112,32 @@ const Service = () => {
 
 const Wrapper = styled.section`
     padding: 2rem;
-    max-width: 1200px;
     margin: 0 auto;
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        .content {
+            box-shadow: 2px 2px 4px rgb(254 254 254 / 61%),
+            -2px -2px 4px  rgb(255 246 246 / 68%);
+            background: #374151;
+            
+            color: #cccfd3;
+        }
+        .body{
+            color: #f9fafb;
+        }
+        .section h3 {
+            color: darkgrey;
+        }
+        .section ul li {
+            color: #ffffff
+        }
 
+    }
     .content {
         background: #fff;
-        padding: 2rem;
+        max-width: 1150px;
+        margin-left: 8rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
@@ -125,6 +147,7 @@ const Wrapper = styled.section`
     }
 
     .header h2 {
+        padding-top: 20px;
         font-size: 2rem;
         font-weight: bold;
     }
@@ -176,11 +199,10 @@ const Wrapper = styled.section`
     .section ul li {
         font-size: 1rem;
         margin-bottom: 0.5rem;
-        color: #3f3f3f !important;
+        color: #3f3f3f ;
     }
     .section1 {
         padding: 1rem;
-       
         border-radius: 8px;
     }
 
@@ -204,7 +226,7 @@ const Wrapper = styled.section`
     .section1 ul li {
         font-size: 1rem;
         margin-bottom: 0.5rem;
-        color: #7a7a7a !important
+        color: #a4a0a0d4
     }
 
 
@@ -235,9 +257,7 @@ const Wrapper = styled.section`
 
     .images .image-1 {
         max-width: 55%;
-    border-style: solid;
-    border-width: 15px 15px 15px 15px;
-    border-color: #FFFFFF;
+  
     vertical-align: middle;
     display: inline-block;
     box-shadow: none;
@@ -260,6 +280,7 @@ const Wrapper = styled.section`
      
         grid-gap: calc(1rem + 0.5vw);
     }
+    
 `;
 
 export default Service;

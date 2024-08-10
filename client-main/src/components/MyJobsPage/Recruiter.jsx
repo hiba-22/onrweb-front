@@ -2,13 +2,14 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import LoadingComTwo from "../shared/LoadingComTwo";
-
+import useThemeDash from "../../context/ThemeDash";
 import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import { updateHandler } from "../../utils/FetchHandlers";
 import Swal from "sweetalert2";
 const queryClient = new QueryClient();
 
 const Recruiter = () => {
+    const { themeDashMode } = useThemeDash();
     const {
         isPending,
         isError,
@@ -93,7 +94,7 @@ const Recruiter = () => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="content-row">
                 <table className="table">
                     <thead>
@@ -225,7 +226,7 @@ const Wrapper = styled.section`
         border-radius: 8px;
     }
     .table thead {
-        background-color: var(--color-accent);
+        background-color: #247bf7b8;
         color: var(--color-white);
         font-size: 14px;
         letter-spacing: 1px;
@@ -274,6 +275,12 @@ const Wrapper = styled.section`
     }
     .action.resume {
         background-color: #ef9712;
+    }
+    &.dark {
+        background-color: #1f2937;
+        .title-row{
+          color: #cccfd3;
+      }
     }
 `;
 

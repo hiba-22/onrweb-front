@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import useTheme from "../../context/Theme";
 
 const ApplyFormModal = ({ onClose, onSubmit }) => {
+  const { themeMode } = useTheme();
   const [guestInfo, setGuestInfo] = useState({
     name: "",
     email: "",
@@ -36,7 +38,7 @@ const ApplyFormModal = ({ onClose, onSubmit }) => {
 
   return (
     <ModalWrapper>
-      <ModalContent>
+      <ModalContent className={themeMode === 'dark' ? 'dark' : '' }>
         <h2>Apply for the Job</h2>
         <form onSubmit={handleSubmit}>
           <Input
@@ -82,6 +84,7 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
+
 `;
 
 const ModalContent = styled.div`
@@ -90,6 +93,20 @@ const ModalContent = styled.div`
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
+  &.dark {
+   
+        background: #374151;
+        border-color: #4b556;
+
+    .row label {
+        
+        color: var( --color-white);
+       
+    }
+    .row input {
+        color:var( --color-black);
+    }
+}
 `;
 
 const Input = styled.input`
@@ -105,11 +122,12 @@ const Button = styled.button`
   margin: 0.5rem;
   border: none;
   border-radius: 4px;
-  background: var(--color-accent);
+  background: #007bff;
   color: #fff;
   cursor: pointer;
   &:hover {
-    background: var(--color-black);
+    background:  #0069d9;
+    box-shadow: 0 0 0 2px #3498db;
   }
 `;
 

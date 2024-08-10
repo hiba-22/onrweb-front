@@ -6,12 +6,14 @@ import SearchAndFilter from "../components/AllJobsPage/SearchAndFilter";
 import Head from "../components/AllJobsPage/Head"
 import Navbar from "../components/shared/Navbar";
 import PaginationCom from "../components/AllJobsPage/PaginationCom";
+import useTheme from "../context/Theme";
 
 const AllJobs = () => {
+    const { themeMode } = useTheme();
     return (
         <> 
             <Navbar />
-            <Wrapper>
+            <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
                 <Head/>
                 <SearchAndFilter />
                 <JobsListCom />
@@ -24,7 +26,12 @@ const AllJobs = () => {
 const Wrapper = styled.section`
     padding: 2rem 1.5rem;
     width: 100%;
-    max-width: 1200px;
+    
     margin: 0 auto;
+      &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        
+    }
 `;
 export default AllJobs;

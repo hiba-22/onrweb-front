@@ -50,7 +50,8 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Landing />,
-            },            {
+            },          
+            {
                 path: "contact",
                 element: (
                     <ContactPage />

@@ -3,13 +3,14 @@ import { useUserContext } from "../context/UserContext";
 import LoadingComTwo from "../components/shared/LoadingComTwo";
 import { CiSquarePlus } from "react-icons/ci";
 import styled from "styled-components";
-
+import useThemeDash from "../context/ThemeDash";
 import Swal from "sweetalert2";
 import { getAllHandler } from "../utils/FetchHandlers";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const ManageUsers = () => {
+    const { themeDashMode } = useThemeDash();
     const { user: me } = useUserContext();
     const {
         isPending,
@@ -78,7 +79,7 @@ const ManageUsers = () => {
         );
     }
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="title-row">
                 Manage Users
                 <CiSquarePlus className="ml-1 text-xl md:text-2xl" />
@@ -197,7 +198,7 @@ const Wrapper = styled.section`
         border-radius: 8px;
     }
     .table thead {
-        background-color: var(--color-accent);
+        background-color: #247bf7b8;
         color: var(--color-white);
         font-size: 14px;
         letter-spacing: 1px;
@@ -238,13 +239,19 @@ const Wrapper = styled.section`
         text-transform: capitalize;
     }
     .action.recruiter {
-        background-color: #ac04ac;
+        background-color: #247bf7
     }
     .action.admin {
-        background-color: #5f14c7;
+        background-color: #247bf7b8;
     }
     .action.user {
-        background-color: #c714c7;
+        background-color: #0c60d8
+    }
+    &.dark {
+        background-color: #1f2937;
+        .title-row{
+          color: #cccfd3;
+      }
     }
 `;
 

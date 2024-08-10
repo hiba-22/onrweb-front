@@ -1,25 +1,21 @@
 import React from "react";
-
+import Logo from "../../src/components/Logo";
+import LogoLight from "../../src/components/Logo-ligth";
+import styled from "styled-components";
+import useTheme from "../context/Theme";
 const Footer = () => {
+  const { themeMode } = useTheme();
   return (
-    <footer className="relative z-10 bg-white pb-5 pt-20 dark:bg-dark lg:pt-[120px]">
-      <div className="container max-w-6xl mx-auto">
-        <div className="flex flex-wrap">
-          <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
-            <div className="mb-10 w-full">
-              <a href="/#" className="mb-6 inline-block max-w-[160px]">
-                <img
-                  src="/src/assets/media/logo.png"
-                  alt="logo"
-                  className="max-w-full dark:hidden"
-                />
-                <img
-                  src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                  alt="logo"
-                  className="max-w-full hidden dark:block"
-                />
+    <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
+    <footer className="footer" >
+      <div className="container">
+        <div className="flex">
+          <div className="full">
+            <div className="premier">
+              <a href="/#" className="logo">
+                {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
               </a>
-              <p className="mb-7 text-base text-body-color dark:text-dark-6">
+              <p className="parg">
                 With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs.
               </p>
             </div>
@@ -37,7 +33,7 @@ const Footer = () => {
           </LinkGroup>
 
           <LinkGroup header="Contact">
-            <p className="mb-7 text-base text-body-color dark:text-dark-6">
+            <p className="adress">
               32, Rue De Perroquets 94350 Villiers Sur Marne, France
             </p>
             <p className="flex items-center text-sm font-medium text-dark dark:text-white">
@@ -74,7 +70,7 @@ const Footer = () => {
                 +33 7 50 21 83 96 <br /> +33 6 25 98 27 27
               </span>
             </p>
-            <NavLink link="mailto:Contact@Onrtech.fr" label="Contact@Onrtech.Fr" />
+            <NavLink className="email" link="mailto:Contact@Onrtech.fr" label="Contact@Onrtech.Fr" />
           </LinkGroup>
 
           <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
@@ -169,6 +165,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+     </Wrapper>
   );
 };
 
@@ -195,5 +192,63 @@ const NavLink = ({ link, label }) => (
     </a>
   </li>
 );
+const Wrapper = styled.div`
+      
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+      padding-bottom: 1.25rem; /* assuming 1rem = 16px */
+      padding-top: 5rem; /* assuming 1rem = 16px */
+    .footer{
+      position: relative;
+      z-index: 10;
+      --tw-bg-opacity: 1;
+    }
+    .container{
+      
+      max-width: 72rem; /* assuming 6xl = 1280px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .flex{
+      flex-wrap: wrap;
+      display: flex;
+     }
+     .full{
+      padding-left: 1rem;
+      padding-right: 1rem;
+     }
+     @media (min-width: 1024px) {
+      .full {
+          width: 25%;
+      }
+    
+    .premier{
+      margin-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .logo{
+      max-width: 160px;
+      display: inline-block
+      margin-bottom: 1.5rem;
+    }
+    .parg{
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 1.75rem;
+      margin-top: 1.75rem;
+    }
+    .adress{
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .email{
 
+    }
+    &.dark {
+      background-color: #1f2937;
+      color: #f9fafb;
+    }
+}
+`
 export default Footer;

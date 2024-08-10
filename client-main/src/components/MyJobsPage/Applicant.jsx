@@ -112,7 +112,7 @@ const Wrapper = styled.section`
         border-radius: 8px;
     }
     .table thead {
-        background-color: var(--color-accent);
+        background-color: #247bf7b8;
         color: var(--color-white);
         font-size: 14px;
         letter-spacing: 1px;

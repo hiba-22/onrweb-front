@@ -8,10 +8,12 @@ import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import useThemeDash from "../context/ThemeDash"; 
 
 const AddArticle = () => {
+    const { themeDashMode } = useThemeDash();
     const [isLoading, setIsLoading] = useState(false);
-	 const [description, setDescription] = useState("");
+	const [description, setDescription] = useState("");
     const { register, handleSubmit, reset, control, formState: { errors } } = useForm();
     const { fields: serviceFields, append: appendService, remove: removeService } = useFieldArray({ control, name: "services" });
     const { fields: communityFields, append: appendCommunity, remove: removeCommunity } = useFieldArray({ control, name: "community" });
@@ -66,7 +68,7 @@ const AddArticle = () => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Create Article
@@ -79,6 +81,7 @@ const AddArticle = () => {
                             <div className="row">
                                 <label htmlFor="titre">Title</label>
                                 <input
+                                    className="inp"
                                     type="text"
                                     id="titre"
                                     name="titre"
@@ -131,6 +134,7 @@ const AddArticle = () => {
                             <div className="row">
                                 <label htmlFor="images">Images</label>
                                 <input
+                                    className="img"
                                     type="file"
                                     id="images"
                                     name="images"
@@ -278,6 +282,7 @@ const AddArticle = () => {
 };
 
 const Wrapper = styled.section`
+
     .title-row {
         display: flex;
         justify-content: flex-start;
@@ -301,7 +306,11 @@ const Wrapper = styled.section`
     }
     .content-row {
         margin-top: calc(2rem + 0.5vw);
-    }
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-top: 0.5px;
+        }
     .form {
         margin-top: calc(30px + 1vw);
         width: 100%;
@@ -332,6 +341,7 @@ const Wrapper = styled.section`
         letter-spacing: 1px;
         color: var(--color-black);
         opacity: 0.95;
+        margin-bottom: 8px;
     }
     input,
     select,
@@ -352,6 +362,7 @@ const Wrapper = styled.section`
         outline: none;
         color: var(--color-black);
     }
+
     textarea {
         max-width: none;
         min-height: 2550px;
@@ -381,6 +392,7 @@ const Wrapper = styled.section`
         transform: translateY(1px);
         box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
     }
+    
     .btn2 {
         width: 100%;
         max-width: 150px;
@@ -429,6 +441,25 @@ const Wrapper = styled.section`
     }
     .xmda-hidden {
         display: none !important;
+    }
+    
+    
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+        }
+        .content-row { box-shadow: 2px 2px 4px rgb(255 255 255 / 10%), -2px -2px 4px rgb(255 255 255 / 10%);}
     }
 `;
 

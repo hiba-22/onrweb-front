@@ -2,13 +2,17 @@
 
 import styled from "styled-components";
 import Logo from "../Logo";
+import LogoLight from "../Logo-ligth";
 import { NavLink } from "react-router-dom";
-
+import ThemeBtn from "../DarkMode/ThemeBtn";
+import useTheme from "../../context/Theme"; 
 const Navbar = ({ navbarRef }) => {
+    const { themeMode } = useTheme();
     return (
-        <Wrapper ref={navbarRef}>
+        <Wrapper ref={navbarRef} className={themeMode === 'dark' ? 'dark' : '' } >
+          
             <div className="container">
-                <Logo />
+                {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 <div className="flex justify-end items-center">
                     <NavLink className="nav-item" to="/all-services">
                         Services
@@ -35,8 +39,11 @@ const Navbar = ({ navbarRef }) => {
                             <option value="ar">Arabic</option>
                         </select>
                     </LanguageSelector>
+                    <ThemeBtn/>
                 </div>
+                
             </div>
+            
         </Wrapper>
     );
 };
@@ -51,16 +58,20 @@ const LanguageSelector = styled.div`
         font-weight: 500;
         text-transform: capitalize;
         margin-left: 20px;
+        margin-right: 20px;
         color: var(--color-black);
     }
 `;
 
 const Wrapper = styled.div`
+
     width: 100%;
     display: flex;
     justify-content: center;
     box-shadow: 0 5px 5px var(--shadow-light);
     padding: 1rem 0;
+    transition: box-shadow 0.3s ease;
+
     .container {
         width: 100%;
         max-width: 1200px;
@@ -86,6 +97,17 @@ const Wrapper = styled.div`
         .container {
             display: flex;
             /* justify-content: center; */
+        }
+    }
+    &.dark {
+        background-color: #1a2330;
+        color: #f9fafb;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        .container .nav-item{
+            color: var( --color-white);
+        }
+        .container .nav-item.active {
+            color: var(--color-primary);
         }
     }
 `;

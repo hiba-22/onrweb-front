@@ -5,8 +5,10 @@ import { TfiLocationPin } from "react-icons/tfi";
 import { TbTargetArrow } from "react-icons/tb";
 import { useUserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
+import useTheme from "../../context/Theme";
 
 const ServiceCard = ({ service }) => {
+  const { themeMode } = useTheme();
   const date = dayjs(service?.publishedAt).format("MMM Do, YYYY");
   const { user } = useUserContext();
 
@@ -16,7 +18,7 @@ const ServiceCard = ({ service }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
       <div className="card-container">
         {service?.images && service.images.length > 0 && (
           <div className="image-container">
@@ -184,6 +186,35 @@ const Wrapper = styled.div`
   }
   .end-row .apply-btn:hover {
     background-color: var(--color-black);
+  }
+  &.dark {
+    background-color: #151b25;
+    color: #f9fafb;
+    .end-row .detail-btn {
+      background-color: #d0d2d5;
+      color: var(--color-white);
+    }
+    .end-row .detail-btn:hover {
+      background-color: #5095f9;
+    }
+    .end-row .apply-btn:hover {
+      background-color: #d0d2d5;
+    }
+    .right .title {
+          color: #d0d2d5;
+    }
+    .right .company {
+      color: #d0d2d5;
+    }
+    .status span {
+      color: #151b25;
+    }
+    .card-container:hover {
+      background: linear-gradient(135deg, rgb(0 152 255 / 27%), rgb(255, 255, 255));
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+  }
+    }
   }
 `;
 

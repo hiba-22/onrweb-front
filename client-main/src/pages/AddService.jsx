@@ -8,8 +8,9 @@ import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
+import useThemeDash from "../context/ThemeDash"; 
 const AddService = () => {
+    const { themeDashMode } = useThemeDash();
     const [isLoading, setIsLoading] = useState(false);
 	 const [description, setDescription] = useState("");
     const { register, handleSubmit, reset, control, formState: { errors } } = useForm();
@@ -68,7 +69,7 @@ const AddService = () => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Create Service
@@ -268,6 +269,7 @@ const AddService = () => {
                             <div className="row">
                                 <label htmlFor="images">Images</label>
                                 <input
+                                className="img"
                                     type="file"
                                     id="images"
                                     name="images"
@@ -329,6 +331,9 @@ const Wrapper = styled.section`
     }
     .content-row {
         margin-top: calc(2rem + 0.5vw);
+        padding-left: 40px;
+        padding-bottom: 20px;
+        padding-top: 0.5px;
     }
     .form {
         margin-top: calc(30px + 1vw);
@@ -360,6 +365,7 @@ const Wrapper = styled.section`
         letter-spacing: 1px;
         color: var(--color-black);
         opacity: 0.95;
+        margin-bottom: 8px;
     }
     input,
     select,
@@ -457,6 +463,23 @@ const Wrapper = styled.section`
     }
     .xmda-hidden {
         display: none !important;
+    }
+    &.dark {
+        background-color: #1f2937;
+        color: #f9fafb;
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+        }
+        .content-row { box-shadow: 2px 2px 4px rgb(255 255 255 / 10%), -2px -2px 4px rgb(255 255 255 / 10%);}
     }
 `;
 

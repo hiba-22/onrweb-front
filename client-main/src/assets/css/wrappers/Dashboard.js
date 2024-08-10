@@ -15,6 +15,12 @@ const Wrapper = styled.section`
             grid-template-columns: 1fr;
         }
     }
+    &.dark {
+        background-color:  #1f2937;
+        color: #f9fafb;
+    }
+  
+
 `;
 
 export default Wrapper;

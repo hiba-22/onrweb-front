@@ -7,7 +7,7 @@ import LoadingComTwo from "../components/shared/LoadingComTwo";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { MdVisibility } from "react-icons/md";
-
+import useThemeDash from "../context/ThemeDash";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllHandler } from "../utils/FetchHandlers";
 
 const ManageJobs = () => {
+    const { themeDashMode } = useThemeDash();
     const {
         isPending,
         isError,
@@ -93,7 +94,7 @@ const ManageJobs = () => {
         );
     }
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="title-row">
                 Manage Jobs
                 <CiSquarePlus className="ml-1 text-xl md:text-2xl" />
@@ -183,7 +184,7 @@ const Wrapper = styled.section`
         border-radius: 8px;
     }
     .table thead {
-        background-color: var(--color-accent);
+        background-color: #247bf7b8;
         color: var(--color-white);
         font-size: 14px;
         letter-spacing: 1px;
@@ -227,6 +228,12 @@ const Wrapper = styled.section`
     }
     .action.delete {
         color: #f1322f;
+    }
+    &.dark {
+        background-color: #1f2937;
+        .title-row{
+          color: #cccfd3;
+      }
     }
 `;
 

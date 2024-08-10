@@ -5,10 +5,10 @@ import { CiFilter, CiSearch } from "react-icons/ci";
 import { useJobContext } from "../../context/JobContext";
 import throttle from "lodash/throttle";
 import debounce from "lodash/debounce";
-
+import useTheme from "../../context/Theme";
 const SearchAndFilter = () => {
     const { handleJobFetch } = useJobContext();
-
+    const { themeMode } = useTheme();
     const [typeFilter, setTypeFilter] = useState("");
     //const [statusFilter, setStatusFilter] = useState("");
     const [ModalityFilter, setModalityFilter] = useState("");
@@ -70,7 +70,7 @@ const SearchAndFilter = () => {
     }, [typeFilter, ModalityFilter, sortBy, searchQuery]);
 
     return (
-        <Wrapper>
+        <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
             <form action="" className="form">
                 <div className="filter">
                     <div className="hidden">
@@ -146,6 +146,8 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     border-radius: 6px;
+    max-width: 1152px;
+    margin-left: 130px;
     .form {
         width: 100%;
         display: flex;
@@ -231,6 +233,13 @@ const Wrapper = styled.div`
         border-radius: 6px;
         transition: all 0.3s ease-in;
     }
+    &.dark {
+        color: #f9fafb;
+        .search-row .search{
+            color:var( --color-black);
+        }
+    }
+
 `;
 
 export default SearchAndFilter;

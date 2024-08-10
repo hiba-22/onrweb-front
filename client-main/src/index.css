@@ -1,3 +1,4 @@
+/* tailwind.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,3 +22,5 @@
     --shadow-medium: rgba(0, 0, 0, 0.2);
     --shadow-light: rgba(0, 0, 0, 0.1);
 }
+
+

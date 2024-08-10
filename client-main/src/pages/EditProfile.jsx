@@ -8,8 +8,9 @@ import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useUserContext } from "../context/UserContext";
-
+import useThemeDash from "../context/ThemeDash";
 const EditProfile = () => {
+    const { themeDashMode } = useThemeDash();
     const { id } = useParams();
     const { user, handleFetchMe } = useUserContext();
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ const EditProfile = () => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Update Profile
@@ -180,6 +181,7 @@ const EditProfile = () => {
                                     </div>
                                 )}
                                 <input
+                                className="img"
                                     type="file"
                                     id="resume"
                                     name="resume"
@@ -366,6 +368,25 @@ const Wrapper = styled.section`
             margin: 0 auto;
             margin-top: -6px;
         }
+    }
+    &.dark {
+        background-color: #1f2937;
+        
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+            color: var( --color-black);
+        }
+        .content-row { box-shadow: 2px 2px 4px rgb(255 255 255 / 10%), -2px -2px 4px rgb(255 255 255 / 10%);}
+
     }
 `;
 

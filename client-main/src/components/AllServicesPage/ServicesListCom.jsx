@@ -4,7 +4,9 @@ import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
 import JobCard from "./ServiceCard";
 import { useUserContext } from "../../context/UserContext";
+import useTheme from "../../context/Theme";
 const JobsListCom = () => {
+  const { themeMode } = useTheme();
   const { serviceLoading, services } = useServiceContext();
   const { user } = useUserContext();
   if (serviceLoading) {
@@ -34,7 +36,7 @@ const JobsListCom = () => {
     user?.role === "recruiter" ? totalRecruiterServices : totalPublishedServices;
 
   return (
-    <Wrapper> 
+    <Wrapper className={themeMode === 'dark' ? 'dark' : '' }> 
       <h5 className="job-count">
         {user?.role === "recruiter" ? (
           <>
@@ -64,9 +66,13 @@ const JobsListCom = () => {
   );
 };
 const Wrapper = styled.div`
-  background-color: var(--color-gray);
-  width: 100%;
-  margin-top: 1.5rem;
+    background-color: var(--color-gray);
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.2rem 1rem;
+    border-radius: 6px;
+    max-width: 1152px;
+    margin-left: 130px;
   .job-count {
     margin-top: 14px;
     font-size: 11px;
@@ -105,6 +111,13 @@ const Wrapper = styled.div`
       justify-content: center;
     }
   }
+  &.dark {
+    background-color: #1f2937;
+    color: #f9fafb;
+    .job-count {
+        color: var(--color-white);  
+    }
+}
 `;
 
 export default JobsListCom;

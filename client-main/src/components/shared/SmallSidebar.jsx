@@ -4,12 +4,14 @@ import Logo from "../Logo";
 import { FaTimes } from "react-icons/fa";
 import DashboardNavLinks from "./DashboardNavLinks";
 import { useDashboardContext } from "../../Layout/DashboardLayout";
-
+import useThemeDash from "../../context/ThemeDash"; 
+import LogoLight from "../Logo-ligth"; 
 const SmallSidebar = () => {
+    const { themeDashMode } = useThemeDash();
     const { showSidebar, setShowSidebar } = useDashboardContext();
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div
                 className={
                     showSidebar
@@ -23,7 +25,7 @@ const SmallSidebar = () => {
                         <FaTimes />
                     </button>
                     <header className="flex justify-center">
-                        <Logo />
+                        {themeDashMode === 'dark' ? <LogoLight /> :  <Logo />} 
                     </header>
                     <DashboardNavLinks />
                 </div>
@@ -35,6 +37,13 @@ const SmallSidebar = () => {
 const Wrapper = styled.aside`
     @media (min-width: 992px) {
         display: none;
+    }
+    &.dark {
+        background-color: #1a2330;
+        color: #f9fafb;
+        box-shadow: 0px 2px 0 0 rgb(58 148 210 / 56%);
+        
+       
     }
     .sidebar-container {
         position: fixed;

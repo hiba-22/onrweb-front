@@ -16,7 +16,7 @@ import LoadingComTwo from "../components/shared/LoadingComTwo";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import useThemeDash from "../context/ThemeDash"; 
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import dayjs from "dayjs";
 dayjs.extend(advancedFormat);
@@ -25,6 +25,7 @@ import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 const queryClient = new QueryClient(); // Create a client
 
 const EditJob = () => {
+    const { themeDashMode } = useThemeDash();
     const { id } = useParams();
     const {
         isPending,
@@ -122,7 +123,7 @@ const EditJob = () => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
             <div className="">
                 <div className="title-row">
                     Update Job
@@ -675,27 +676,27 @@ const EditJob = () => {
 };
 
 const Wrapper = styled.section`
-    .title-row {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        font-size: calc(0.9rem + 0.4vw);
-        text-transform: capitalize;
-        letter-spacing: 1px;
-        font-weight: 600;
-        opacity: 0.85;
-        color: var(--color-black);
-        titre: relative;
-    }
-    .title-row:before {
-        content: "";
-        titre: absolute;
-        bottom: -4px;
-        left: 0;
-        width: calc(30px + 0.7vw);
-        height: calc(2px + 0.1vw);
-        background-color: var(--color-primary);
-    }
+.title-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: calc(0.9rem + 0.4vw);
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 600;
+    opacity: 0.85;
+    color: var(--color-black);
+    position: relative;
+}
+.title-row:before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: calc(30px + 0.7vw);
+    height: calc(2px + 0.1vw);
+    background-color: var(--color-primary);
+}
     .content-row {
         margin-top: calc(2rem + 0.5vw);
     }
@@ -724,7 +725,7 @@ const Wrapper = styled.section`
         width: 100%;
     }
     .row label {
-        font-size: 11.3px;
+        font-size: 14px;
         font-weight: 600;
         letter-spacing: 1px;
         color: var(--color-black);
@@ -791,6 +792,26 @@ const Wrapper = styled.section`
             margin: 0 auto;
             margin-top: -6px;
         }
+    }
+    &.dark {
+        background-color: #1f2937;
+        
+        .title-row{
+            color: #cccfd3;
+        }
+        .row label{
+            color: var( --color-white);
+        }
+        .img {
+            background-color: var( --color-white);
+        }
+        .textarea{
+            background-color: var( --color-white);
+            color: var( --color-black);
+        }
+        .rti--container {
+            --rti-tag: #4d92d8;
+        } 
     }
 `;
 

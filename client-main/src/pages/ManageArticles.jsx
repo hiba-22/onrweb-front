@@ -9,8 +9,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import LoadingComTwo from "../components/shared/LoadingComTwo";
+import useThemeDash from "../context/ThemeDash";
 
 const ManageArticles = () => {
+  const { themeDashMode } = useThemeDash();
+
   const {
     isPending,
     isError,
@@ -86,7 +89,7 @@ const ManageArticles = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={themeDashMode === 'dark' ? 'dark' : '' }>
       <div className="title-row">
         Manage Articles <CiSquarePlus className="ml-1 text-xl md:text-2xl" />
       </div>
@@ -171,7 +174,7 @@ const Wrapper = styled.section`
     border-radius: 8px;
   }
   .table thead {
-    background-color: var(--color-accent);
+    background-color: #247bf7b8;
     color: var(--color-white);
     font-size: 14px;
     letter-spacing: 1px;
@@ -212,6 +215,13 @@ const Wrapper = styled.section`
   .action.delete {
     color: #f1322f;
   }
+  &.dark {
+    background-color: #1f2937;
+    .title-row{
+      color: #cccfd3;
+  }
+
+}
 `;
 
 export default ManageArticles;

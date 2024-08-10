@@ -5,8 +5,9 @@ import { CiFilter, CiSearch } from "react-icons/ci";
 import { useArticleContext } from "../../context/ArticleContext";
 import throttle from "lodash/throttle";
 import debounce from "lodash/debounce";
-
+import useTheme from "../../context/Theme";
 const SearchAndFilter = () => {
+    const { themeMode } = useTheme();
     const { handleArticleFetch } = useArticleContext();
     const [sortBy, setSortBy] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
@@ -52,7 +53,7 @@ const SearchAndFilter = () => {
     }, [sortBy, searchQuery]);
 
     return (
-        <Wrapper>
+        <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
             <form action="" className="form">
                 <div className="filter">
                     <div className="status-row">
@@ -94,6 +95,8 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     border-radius: 6px;
+    max-width: 1152px;
+    margin-left: 130px;
     .hero-content {
         width: 100%;
         display: grid;
@@ -186,6 +189,13 @@ const Wrapper = styled.div`
         border-radius: 6px;
         transition: all 0.3s ease-in;
     }
+    &.dark {
+        color: #f9fafb;
+        .search-row .search{
+            color:var( --color-black);
+        }
+    }
+
 `;
 
 export default SearchAndFilter;

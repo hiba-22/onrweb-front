@@ -10,8 +10,9 @@ import { useUserContext } from "../../context/UserContext";
 import { postHandler } from "../../utils/FetchHandlers";
 import { Link } from "react-router-dom";
 import ApplyFormModal from "./ApplyFormModal"; // Assuming correct path
-
+import useTheme from "../../context/Theme";
 const JobCard = ({ job }) => {
+  const { themeMode } = useTheme();
   const date = dayjs(job?.jobDeadline).format("MMM Do, YYYY");
   const { user } = useUserContext();
   const [showForm, setShowForm] = useState(false);
@@ -95,7 +96,7 @@ const JobCard = ({ job }) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper  className={themeMode === 'dark' ? 'dark' : '' }>
       <div className="card-container">
         <div className="card-header">
           <div className="logo">
@@ -127,11 +128,11 @@ const JobCard = ({ job }) => {
           )}
         </div>
         <div className="end-row">
-        {user?._id === job?.createdBy && (
+        
           <Link to={`/job/${job._id}`} className="detail-btn">
             details
           </Link>
-        )}
+       
           {!isAdminOrRecruiter() && (
             <button className="apply-btn" onClick={handleApply}>
               Apply
@@ -274,6 +275,29 @@ const Wrapper = styled.div`
   }
   .end-row .apply-btn:hover {
     background-color: var(--color-black);
+  }
+  &.dark {
+    background-color: #151b25;
+    color: #f9fafb;
+    .end-row .detail-btn {
+      background-color: #d0d2d5;
+      color: var(--color-white);
+    }
+    .end-row .detail-btn:hover {
+      background-color: #5095f9;
+    }
+    .end-row .apply-btn:hover {
+      background-color: #d0d2d5;
+    }
+    .right .title {
+          color: #d0d2d5;
+    }
+    .right .company {
+      color: #d0d2d5;
+    }
+    .status span {
+      color: #151b25;
+    }
   }
 `;
 
