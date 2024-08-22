@@ -1,0 +1,18 @@
+{
+    "service": "Services",
+    "offer": "Offers",
+    "article": "Articles",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "en": "English",
+    "fr": "Français",
+    "ar": "Arabic",
+    "Shows":"Shows",
+    "total":"of total",
+    "details":"Details",
+    "edit":"Edit",
+    "placeholder":"Search ..."
+    
+
+}

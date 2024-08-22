@@ -1,0 +1,22 @@
+{
+    "head":"Vous avez un projet ?",
+    "head-1":"Nous contacter",
+    "head-2":"Envoyez-nous un message et nous vous répondrons dans les plus brefs délais.",
+    "labelName":"Nom",
+    "nameV":"Nom",
+    "labelSubject":"Sujet",
+    "SubjectV":"Sujet",
+    "labelEmail":"Email",
+    "EmailV":"exemple@gmail.com",
+    "labelPhone":"Téléphone",
+    "PhoneV":"98 642 637",
+    "labelMessage":"Message",
+    "MessageV":"Comment pouvons-nous vous aider ?",
+    "Submit":"Envoyer",
+    "possible":"Ce numéro est-il possible :",
+    "VALID":"Ce numéro est-il VALIDE dans ce pays :",
+    "International":"Numéro de téléphone international :",
+    "yes": "Oui, c'est vrai",
+    "no": "Non"
+  
+    }

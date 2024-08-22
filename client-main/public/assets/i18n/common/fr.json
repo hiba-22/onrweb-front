@@ -1,0 +1,21 @@
+{
+    
+        "service" : "Services",
+        "offer" : "Offres",
+        "article" : "Articles",
+        "contact" : "Contact",
+        "dashboard" : "Tableau de bord",
+        "login" : "Login",
+        "en": "Anglais", 
+        "fr": "Français", 
+        "ar": "Arabe",
+        
+        "shows":"Montre",
+        "total": "sur un total de ",
+        "details": "Détails",
+        "edit": "Modifier",
+        "placeholder":"Rechercher ..."
+        
+    
+
+}

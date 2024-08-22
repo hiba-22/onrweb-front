@@ -1,0 +1,43 @@
+{
+    "create_Account":"Create Account",
+    "not_matched":"both password not matched",
+    "labelUsername":"Username",
+    "placeholder":"Type Here",
+    "labelSubject":"Subject",
+    "SubjectV":"Subject",
+    "labelEmail":"Email",
+    "EmailV":"Email@example.com",
+    "labelPassword":"Password",
+    "Confirm_Password":"Confirm Password",
+    "Alredy":"Already have an account.",
+    "Login_now":"Login now",
+    "Register":"Register",
+    "errorName":"Username is required",
+    "maxLengthName":"Username is too long(max 30char)",
+    "minLengthName":"Username is too short (min 3char)",
+    "patternName":"Username can't start with number and special characters",
+    "maxLengthPassword": "Password is too long(max 20char)",
+    "minLengthPassword": "Password is too short (min 8char)",
+    "patternPassword":"At least one uppercase,one special char and one number",
+    "patternEmail":"Enter a valid email",
+   
+    
+
+    "Login":"Login",
+    "Forgot":"Forgot your password?",
+    "LoginB":"Login",
+    "Or":"Or Login With",
+    "no":"Don't have an account.",
+    "Create_account":" Create account",
+    "GoogleB":"Google", 
+    "errorEmail":"A valid email is required",
+    "errorPwd":"Password is required",
+
+    "Forget_Password":"Forget Password",
+    "address":"Enter your email address",
+    "valid_email":"A valid email is required",
+    "Continue":"Continue",
+    "Back":"Back to"
+
+
+}

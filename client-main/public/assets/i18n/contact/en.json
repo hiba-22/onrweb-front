@@ -1,0 +1,21 @@
+{
+    "head":"You have a project ?",
+    "head-1":"Contact us",
+    "head-2":"Send us a message and we'll get back to you as soon as possible.",
+    "labelName":"Name",
+    "nameV":"Name",
+    "labelSubject":"Subject",
+    "SubjectV":"Subject",
+    "labelEmail":"Email",
+    "EmailV":"exemple@gmail.com",
+    "labelPhone":"Phone",
+    "PhoneV":"98 642 637",
+    "labelMessage":"Message",
+    "MessageV":"How can we help you ?",
+    "Submit":"Submit",
+    "possible":"Is this number possible :",
+    "VALID":"Is this number VALID in this country:",
+    "International":"International phone number:",
+    "yes":"Yes, it is",
+    "no":"No"
+}
