@@ -22,15 +22,15 @@ export { default as ErrorJob } from "./ErrorJob";
 export { default as ErrorArticle } from "./ErrorArticle";
 export { default as ErrorService } from "./ErrorService";
 export { default as Landing } from "./Landing";
-export { default as ContactPage } from "./ContactPage";
 export { default as Login } from "./Login";
-export { default as ForgetPassword } from "./ForgetPassword";
+export { default as ForgotPassword } from "./ForgetPassword";
 export { default as ResetPassword } from "./ResetPassword";
+export { default as SetPasswordGeust } from "./SetPasswordGeust";
 export { default as Profile } from "./Profile";
 export { default as EditProfile } from "./EditProfile";
 export { default as ManageUsers } from "./ManageUsers";
 export { default as Register } from "./Register";
 export { default as Stats } from "./Stats";
 export { default as Error } from "./Error";
-
-
+export { default as Activate } from "./ActivationPage";
+export { default as ContactPage } from "./ContactPage";

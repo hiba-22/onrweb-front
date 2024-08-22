@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import { useArticleContext } from "../../context/ArticleContext";
 const Landing = () => {
+    const { t } = useTranslation(["article"]);
     const { handleArticleFetch } = useArticleContext();
     const [searchQuery, setSearchQuery] = useState("");
     useEffect(() => {
         const baseUrl =
-            "https://onr-backend.vercel.app/api/v1/articles?page=1&limit=6";
+            "http://localhost:3000/api/v1/articles?page=1&limit=6";
         let url = baseUrl;
         const queryParams = {};
 
@@ -29,9 +31,9 @@ const Landing = () => {
             <Wrapper>
                 <div className="hero-content">
                     <div className="text-content">
-                    <h1> Find your <span className="fancy">new article</span> today </h1>
+                    <h1> {t("head")} <span className="fancy">{t("head-1")}</span> {t("head-2")} </h1>
                         <p>
-                            Thousands of Articles in the computer ,engineering and technology sectors are waiting for you.
+                            {t("head-3")}
                         </p>
                     
                     </div>

@@ -4,8 +4,10 @@ import LoadingComTwo from "../shared/LoadingComTwo";
 import styled from "styled-components";
 import JobCard from "./JobCard";
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 
 const JobsListCom = () => {
+    const { t } = useTranslation(["common","offer"]);
     const { themeMode } = useTheme();
     const { jobLoading, jobs } = useJobContext();
 
@@ -16,26 +18,26 @@ const JobsListCom = () => {
     if (!jobs?.result?.length) {
         return (
             <h2 className="text-lg md:text-3xl text-center font-bold mt-24 text-red-600">
-                No Job Found
+                {t("Found")}
             </h2>
         );
     }
     return (
         <Wrapper  className={themeMode === 'dark' ? 'dark' : '' }>
             <h5 className="job-count">
-                Shows
+                {t("common:shows")}
                 <span className="fancy">
                     {jobs?.result?.length < 10
                         ? `0${jobs?.result?.length}`
                         : jobs?.result?.length}
                 </span>
-                of total
+                {t("common:total")}
                 <span className="fancy">
                     {jobs?.totalJobs < 10
                         ? `0${jobs?.totalJobs}`
                         : jobs?.totalJobs}
                 </span>
-                Jobs
+                {t("offer:Jobs")}
             </h5>
 
             <div className="list-container">

@@ -6,7 +6,9 @@ import { TbTargetArrow } from "react-icons/tb";
 import { useUserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 const ArticleCard = ({ article }) => {
+  const { t } = useTranslation(["common","article"]);
   const { themeMode } = useTheme();
   const date = dayjs(article?.publishedAt).format("MMM Do, YYYY");
   const { user } = useUserContext();
@@ -49,11 +51,11 @@ const ArticleCard = ({ article }) => {
         </div>
         <div className="end-row">
           <Link to={`/article/${article._id}`} className="detail-btn">
-            details
+            {t("common:details")}
           </Link>
           {user?._id === article?.createdBy && (
             <Link to={`/dashboard/edit-article/${article._id}`} className="detail-btn">
-              edit
+              {t("common:edit")}
             </Link>
           )}
         </div>

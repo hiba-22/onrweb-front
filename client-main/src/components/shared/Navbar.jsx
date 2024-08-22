@@ -6,7 +6,21 @@ import LogoLight from "../Logo-ligth";
 import { NavLink } from "react-router-dom";
 import ThemeBtn from "../DarkMode/ThemeBtn";
 import useTheme from "../../context/Theme"; 
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import i18next from "i18next";
+
 const Navbar = ({ navbarRef }) => {
+    const {i18n,t} = useTranslation(["common"]);
+    useEffect(()=>{
+        if (localStorage.getItem("i18nextLng")?.length > 2){
+            i18next.changeLanguage("en");
+
+        }
+    },[]);
+    const handleLangageChange = (e)=>{
+        i18n.changeLanguage(e.target.value);
+    }
     const { themeMode } = useTheme();
     return (
         <Wrapper ref={navbarRef} className={themeMode === 'dark' ? 'dark' : '' } >
@@ -15,28 +29,29 @@ const Navbar = ({ navbarRef }) => {
                 {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 <div className="flex justify-end items-center">
                     <NavLink className="nav-item" to="/all-services">
-                        Services
+                        {t("service")}
                     </NavLink>
                     <NavLink className="nav-item" to="/all-jobs">
-                        Offers
+                        {t("offer")}
                     </NavLink>
                     <NavLink className="nav-item" to="/all-articles">
-                        Article
+                        {t("article")}
                     </NavLink>
                     <NavLink className="nav-item" to="/contact">
-                        Contact
+                        {t("contact")}
                     </NavLink>
                     <NavLink className="nav-item hidden sm:block" to="/dashboard">
-                        Dashboard
+                        {t("dashboard")}
                     </NavLink>
                     <NavLink className="nav-item" to="/login">
-                        <span className="bg-[#247BF7] text-white px-6 py-2 rounded"> Login</span>
+                        <span className="bg-[#247BF7] text-white px-6 py-2 rounded">{t("login")}</span>
                     </NavLink>
                     <LanguageSelector>
-                        <select>
-                            <option value="en">English</option>
-                            <option value="fr">Français</option>
-                            <option value="ar">Arabic</option>
+                        <select value={localStorage.getItem("i18nextLng")} 
+                        onChange={handleLangageChange}>
+                            <option value="en"> {t("en")} </option>
+                            <option value="fr"> {t("fr")} </option>
+                            <option value="ar"> {t("ar")} </option>
                         </select>
                     </LanguageSelector>
                     <ThemeBtn/>

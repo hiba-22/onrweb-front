@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import contact from "../../assets/media/contact.png";
 import styled from "styled-components";
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 const Testimonial = () => {
+  const {t} = useTranslation(["home"]);
   const { themeMode } = useTheme();
   return (
     <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
@@ -16,15 +18,14 @@ const Testimonial = () => {
         <figure className="mt-10">
           <blockquote className="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9 dark:text-white ">
             <p>
-              “If You Have Any Questions Or Concerns, We're Here To Help. You Can Reach Out To Us To
-              Discuss Your Needs, And Our Team Will Be Happy To Provide Assistance.”
+              “{t("p3")}”
             </p>
           </blockquote>
           <figcaption className="mt-10">
           <div className="mt-4 flex items-center justify-center space-x-3 text-base mb-12">
             <div className="btn-grp ">
                 <Link className="inline-block px-6 py-3 text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300" to="/Contact">
-                                Contact Now
+                               {t("contact")}
                 </Link>
             </div> 
             </div>

@@ -8,6 +8,7 @@ import InlineError from "../utils/InlineError";
 import 'react-phone-number-input/style.css'
 import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber, isPossiblePhoneNumber } from 'react-phone-number-input';
 import useTheme from "../context/Theme";
+import { useTranslation } from "react-i18next";
 const ContactWrapper = styled.div`
     display: flex;
     justify-content: space-between;
@@ -139,6 +140,7 @@ const PhoneInputWrapper = styled.div`
 `;
 
 const Contact = () => {
+    const { t } = useTranslation(["contact"]);
     const { themeMode } = useTheme();
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
@@ -162,6 +164,7 @@ const Contact = () => {
             user_name : name,
             user_email: email,
             user_subject : subject,
+            message : message,
         };
 
         emailjs.send('service_yy49ssl', 'template_4p7j7bj', formData, 'M2zBgsbvSJrGg-zHj')
@@ -192,9 +195,9 @@ const Contact = () => {
             <ContactWrapper ref={heroRef} className={themeMode === 'dark' ? 'dark' : '' }>
                 <div className="text-content">
                     <div className="text-c">
-                    <h1><strong>You have a project ?</strong></h1>
-                    <h1><span className="fancy">Contact us</span></h1>
-                    <p>Send us a message and we'll get back to you as soon as possible.</p>
+                    <h1><strong>{t("head")} </strong></h1>
+                    <h1><span className="fancy">{t("head-1")} </span></h1>
+                    <p>{t("head-2")}</p>
                     </div>
                     
                     <div className="frame">
@@ -205,66 +208,68 @@ const Contact = () => {
                 <div className="form-content">
                     <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-div">
-                            <label>Name</label>
+                            <label>{t("labelName")}</label>
                             <input
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
                                 type="text"
                                 name="user_name"
-                                placeholder="Name"
+                                placeholder={t("nameV")}
                             />
                             {nameError && <InlineError error={nameError} />}
-                            <label>Subject</label>
+                            <label>{t("labelSubject")}</label>
                             <input
                                 type="text"
                                 name="user_subject"
-                                placeholder="Subject"
+                                placeholder={t("SubjectV")}
                                 value={subject}
                                 onChange={(e) => setSubject(e.target.value)}
                                 required
                             />
                             {subjectError && <InlineError error={subjectError} />}
-                            <label>Email</label>
+                            <label>{t("labelEmail")}</label>
                             <input
                                 type="email"
+                                placeholder={t("EmailV")}
                                 name="user_email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                             {emailError && <InlineError error={emailError} />}
-                            <label>Phone</label>
+                            <label>{t("labelPhone")}</label>
                             <PhoneInputWrapper>
                                 <PhoneInput
                                     className="phoneInput"
                                     name="user_phone"
                                     defaultCountry="TN"
                                     value={phone}
+                                    placeholder={t("PhoneV")}
                                     onChange={(value) => setPhone(value)}
                                     inputProps={{ required: true }}
                                 />
                             </PhoneInputWrapper>
                             <span className={phone && isPossiblePhoneNumber(phone) ? "valid" : "error"}>
-                                Is this number possible: {phone && isPossiblePhoneNumber(phone) ? "Yes, it is" : "No"}
+                                {t("possible")} {phone && isPossiblePhoneNumber(phone) ? t("yes") : t("no")}
                             </span>
                             <span className={phone && isValidPhoneNumber(phone) ? "valid" : "error"}>
-                                Is this number VALID in this country: {phone && isValidPhoneNumber(phone) ? "Yes, it is" : "No"}
+                                {t("VALID")} {phone && isValidPhoneNumber(phone) ? t("yes") : t("no")}
                             </span>
                             <span className="valid">
-                                International phone number: {phone && formatPhoneNumberIntl(phone)}
+                                {t("International")}  {phone && formatPhoneNumberIntl(phone)}
                             </span>
-                            <label>Message</label>
+                            <label>{t("labelMessage")}</label>
                             <textarea
                                 name="message"
-                                placeholder="How can we help you?"
+                                placeholder={t("MessageV")}
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 required
                             />
                             {messageError && <InlineError error={messageError} />}
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit">{t("Submit")}</button>
                     </form>
                 </div>
             </ContactWrapper>

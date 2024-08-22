@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import './App.css';
@@ -9,8 +9,9 @@ import { UserContext } from "./context/UserContext";
 import axios from "axios";
 import { ThemeProvider } from "./context/Theme";
 import { ThemeDashProvider } from "./context/ThemeDash";
-
-
+import "./i18n"
+import BackToTopButton from "../src/components/shared/BackToTopButton";
+import ChatBot from "../src/components/shared/ChatBot";
 axios.defaults.withCredentials = true;
 
 // Create a client
@@ -50,19 +51,22 @@ const Main = () => {
   }, [themeDashMode]);
 
   return (
-    <React.StrictMode>
-     
-        <QueryClientProvider client={queryClient}>
-        <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
-        <ThemeDashProvider value={{ themeDashMode, darkThemeDash, lightThemeDash}}>
-          <UserContext>
-            <RouterProvider router={router} ></RouterProvider>
-          </UserContext>
-          </ThemeDashProvider>
-          </ThemeProvider>
-        </QueryClientProvider>
-      
-    </React.StrictMode>
+    <Suspense fallback={null}>
+        <React.StrictMode>
+            <QueryClientProvider client={queryClient}>
+            <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
+            <ThemeDashProvider value={{ themeDashMode, darkThemeDash, lightThemeDash}}>
+              <UserContext>
+                <RouterProvider router={router} ></RouterProvider>
+                <BackToTopButton />
+                <ChatBot/>
+               
+              </UserContext>
+              </ThemeDashProvider>
+              </ThemeProvider>
+            </QueryClientProvider>
+        </React.StrictMode>
+    </Suspense>
   );
 };
 

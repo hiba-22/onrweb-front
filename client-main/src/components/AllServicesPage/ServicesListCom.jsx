@@ -5,7 +5,9 @@ import styled from "styled-components";
 import JobCard from "./ServiceCard";
 import { useUserContext } from "../../context/UserContext";
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 const JobsListCom = () => {
+  const { t } = useTranslation(["service"]);
   const { themeMode } = useTheme();
   const { serviceLoading, services } = useServiceContext();
   const { user } = useUserContext();
@@ -16,7 +18,7 @@ const JobsListCom = () => {
   if (!services?.result?.length) {
     return (
       <h2 className="text-lg md:text-3xl text-center font-bold mt-24 text-red-600">
-        No service Found
+        {t("Found")}
       </h2>
     );
   }
@@ -37,26 +39,6 @@ const JobsListCom = () => {
 
   return (
     <Wrapper className={themeMode === 'dark' ? 'dark' : '' }> 
-      <h5 className="job-count">
-        {user?.role === "recruiter" ? (
-          <>
-            Shows{" "}
-            <span className="fancy">
-              {totalCount < 10 ? `0${totalCount}` : totalCount}
-            </span>{" "}
-            of total
-            <span className="fancy">
-              {totalCount < 10 ? `0${totalCount}` : totalCount}
-            </span>{" "}
-            services
-          </>
-          
-        ) : (
-          <>
-          </>
-        )}
-      </h5>
-
       <div className="list-container">
         {services?.result?.map((service) => (
           <JobCard key={service._id} service={service} />

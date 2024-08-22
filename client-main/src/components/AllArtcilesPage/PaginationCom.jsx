@@ -14,7 +14,7 @@ const PaginationCom = () => {
         // );
         // setItemOffset(newOffset);
         handleArticleFetch(
-            `https://onr-backend.vercel.app/api/v1/articles?page=${
+            `http://localhost:3000/api/v1/articles?page=${
                 e.selected + 1
             }&limit=6`
         );

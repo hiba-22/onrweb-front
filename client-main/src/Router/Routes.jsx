@@ -5,8 +5,10 @@ import DashboardLayout from "../Layout/DashboardLayout";
 // Pages
 import {
     Register,
+    Activate,
     Login,
     Landing,
+    SetPasswordGeust,
     ContactPage,
     Error,
     AllJobs,
@@ -20,7 +22,7 @@ import {
     MyJobs,
     EditProfile,
     ManageUsers,
-    ForgetPassword,
+    ForgotPassword,
     ResetPassword,
     AddArticle,
     AllArticles,
@@ -50,7 +52,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Landing />,
-            },          
+            },
             {
                 path: "contact",
                 element: (
@@ -58,48 +60,37 @@ const router = createBrowserRouter([
 
                 ),
             },
+        
             {
                 path: "all-jobs",
                 element: (
-                    
-                        <JobContext>
-                            <AllJobs />
-                        </JobContext>
-                    
+                    <JobContext>
+                        <AllJobs />
+                    </JobContext> 
                 ),
             },
             {
                 path: "job/:id",
                 element: (
-                    
-                        <JobContext>
-                            <Job />
-                        </JobContext>
-                    
+                    <JobContext>
+                        <Job />
+                    </JobContext>
                 ),
-            }
-            ,
+            },
             {
                 path: "all-articles",
                 element: (
-                    
                     <ArticleContext>
                         <AllArticles/>
-                        </ArticleContext>
-                        
-                            
-                       
-                    
+                    </ArticleContext>   
                 ),
             },
             {
                 path: "article/:id",
                 element: (
-                    
                     <ArticleContext>
-                            <Article />
-                            </ArticleContext>
-                    
+                        <Article />
+                    </ArticleContext>
                 ),
             },
             {
@@ -118,9 +109,18 @@ const router = createBrowserRouter([
                     </ServiceContext>
                 ),
             },
+
             {
                 path: "register",
                 element: <Register></Register>,
+            },
+            {
+                path: "activate/:token",
+                element: <Activate></Activate>,
+            },
+            {
+                path: "setPassword/:id/:token",
+                element: <SetPasswordGeust></SetPasswordGeust>,
             },
             {
                 path: "login",
@@ -128,10 +128,10 @@ const router = createBrowserRouter([
             },
             {
                 path: "forgot_password",
-                element: <ForgetPassword></ForgetPassword>,
+                element: <ForgotPassword></ForgotPassword>,
             },
             {
-                path: "reset",
+                path: "reset/:id/:token",
                 element: <ResetPassword></ResetPassword>,
             },
             {
@@ -193,6 +193,7 @@ const router = createBrowserRouter([
                             </RecruiterRoute>
                         ),
                     },
+                    
                     {
                         path: "add-services",
                         element: (

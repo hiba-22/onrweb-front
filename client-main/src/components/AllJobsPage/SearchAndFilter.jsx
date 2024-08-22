@@ -6,7 +6,9 @@ import { useJobContext } from "../../context/JobContext";
 import throttle from "lodash/throttle";
 import debounce from "lodash/debounce";
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 const SearchAndFilter = () => {
+    const { t } = useTranslation(["offer","common"]);
     const { handleJobFetch } = useJobContext();
     const { themeMode } = useTheme();
     const [typeFilter, setTypeFilter] = useState("");
@@ -41,7 +43,7 @@ const SearchAndFilter = () => {
     };
 
     useEffect(() => {
-        const baseUrl = "https://onr-backend.vercel.app/api/v1/jobs?page=1&limit=5";
+        const baseUrl = "http://localhost:3000/api/v1/jobs?page=1&limit=5";
         let url = baseUrl;
         const queryParams = {};
 
@@ -77,13 +79,13 @@ const SearchAndFilter = () => {
                         <CiFilter />
                     </div>
                     <div className="type-row">
-                        <span className="text">Types</span>
+                        <span className="text">{t("search_type")}</span>
                         <select
                             className="type-select"
                             onChange={(e) => setTypeFilter(e.target.value)}
                             value={typeFilter}
                         >
-                            <option value="">default</option>
+                            <option value="">{t("default")}</option>
                             {Job_Type?.map((type, i) => (
                                 <option key={i + type} value={type}>
                                     {type}
@@ -92,13 +94,13 @@ const SearchAndFilter = () => {
                         </select>
                     </div>
                     <div className="status-row">
-                        <span className="text">Modality</span>
+                        <span className="text">{t("search_Modality")}</span>
                         <select
                             className="status-select"
                             onChange={(e) => setModalityFilter(e.target.value)}
                             value={ModalityFilter}
                         >
-                            <option value="">default</option>
+                            <option value="">{t("default")}</option>
                             {JOB_Modality?.map((type, i) => (
                                 <option key={i + type} value={type}>
                                     {type}
@@ -107,13 +109,13 @@ const SearchAndFilter = () => {
                         </select>
                     </div>
                     <div className="status-row">
-                        <span className="text">Sort By</span>
+                        <span className="text">{t("search_Sort_By")}</span>
                         <select
                             className="status-select"
                             onChange={(e) => setSortBy(e.target.value)}
                             value={sortBy}
                         >
-                            <option value="">default</option>
+                            <option value="">{t("default")}</option>
                             {Job_Sort_By?.map((type, i) => (
                                 <option key={i + type} value={type}>
                                     {type}
@@ -126,7 +128,7 @@ const SearchAndFilter = () => {
                     <input
                         type="text"
                         className="search"
-                        placeholder="Type Job Title"
+                        placeholder= {t("common:placeholder")}
                         onChange={handleSearchChange}
                         // Using value={searchQuery} might cause the throttle to trigger continuously,
                         // it's better to leave the input value uncontrolled.

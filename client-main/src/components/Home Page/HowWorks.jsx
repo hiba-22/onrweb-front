@@ -1,13 +1,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-QkltoCqReGM1jx8cXL3s1CgrTdCnAlq8C7VrMdrVyN1OFUM6C2N0O9e34nOgmPLFdzqo8xvw5bYrDl/gz9s5Yg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  const stats = [
-    { name: 'Working Hours', value: '14400' , iconClass: 'fas fa-clock' },
-    { name: 'Completed Projects', value: '90', iconClass: 'fa-solid fa-gift'},
-    { name: 'Happy Clients', value: '60', iconClass: 'fa-solid fa-users' },
-    { name: 'Awards Received', value: '15' , iconClass: 'fa-solid fa-award'},
-  ]
-  
+import { useTranslation } from "react-i18next";
+ 
   export default function HowWorks() {
+    const { t } = useTranslation(["home"]);
+    const stats = [
+      { name: t('Hours'), value: '14400' , iconClass: 'fas fa-clock' },
+      { name: t('Projects'), value: '90', iconClass: 'fa-solid fa-gift'},
+      { name: t('Clients'), value: '60', iconClass: 'fa-solid fa-users' },
+      { name: t('Awards'), value: '15' , iconClass: 'fa-solid fa-award'},
+    ]
+    
     const backgroundStyle = {
     
       backgroundSize: 'cover',

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import LogoLight from "../components/Logo-ligth";
-import { useNavigate,useParams } from "react-router-dom";
+import {Link, useLocation, useNavigate,useParams } from "react-router-dom";
 import useTheme from "../context/Theme";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 
 const ResetPassword = () => {
     const { themeMode } = useTheme();
@@ -14,64 +16,47 @@ const ResetPassword = () => {
         register,
         handleSubmit,
         reset,
-        watch,
         formState: { errors },
     } = useForm();
-    const [isPasswordMatched, setIsPasswordMatched] = useState({
-        status: true,
-        message: "",
-    });
+    const {id,token} = useParams()
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/"; // to navigate right location after login
 
     const onSubmit = async (data) => {
-        // password: A@1abcde
-        const {password, confirmPassword } = data;
-        const {token} = useParams()
-        if (password !== confirmPassword) {
-            setIsPasswordMatched({
-                status: false,
-                message: "Both password not matched.",
+        setIsLoading(true);
+        
+
+        // posting
+        try {
+            const response = await axios.post(
+                `http://localhost:3000/api/v1/auth/reset/${id}/${token}`,
+                data,
+                {
+                    withCredentials: true,
+                }
+            );
+            Swal.fire({
+                icon: "success",
+                title: "Hurray...",
+                text: response?.data?.message,
             });
-            return;
-        } else {
-            setIsLoading(true);
-            //const user = { password };
-            //console.log(user);
-            // posting
-            try {
-                const response = await axios.post(
-                    "https://onr-backend.vercel.app/api/v1/auth/reset", { password }, 
-                );
-                    console.log(response);
-                Swal.fire({
-                    icon: "success",
-                    title: "Hurray...",
-                    text: response?.data?.message,
-                });
-                reset();
-                navigate("/login");
-            } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: error?.response?.data,
-                });
-            }
+            
+
+            //reset();
+         navigate("/login");
+            // navigate("/dashboard");
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error?.response?.data,
+            });
+            
         }
         setIsLoading(false);
     };
-
-    // to hide the popup
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setIsPasswordMatched({ status: true, message: "" });
-        }, 2000);
-
-        return () => {
-            clearInterval(intervalId); // Clear the interval on component unmount or when dependencies change
-        };
-    }, [isPasswordMatched.status]);
 
     return (
         <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
@@ -80,14 +65,9 @@ const ResetPassword = () => {
                     {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
                 <h1>Reset Your Password</h1>
-                {!isPasswordMatched?.status && (
-                    <p className="text-[11px] font-semibold text-center text-red-700 bg-red-100 px-1 py-2 mt-4 tracking-wider">
-                        both password not matched
-                    </p>
-                )}
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                     <div className="row">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="email">New password</label>
                         <input
                             type="password"
                             name="password"
@@ -119,32 +99,22 @@ const ResetPassword = () => {
                             </span>
                         )}
                     </div>
-                    <div className="row">
-                        <label htmlFor="password">Confirm Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Type Here"
-                            {...register("confirmPassword", {
-                                required: {
-                                    value: true,
-                                    message: "Password is required",
-                                },
-                            })}
-                        />
-                        {errors?.confirmPassword && (
-                            <span className="text-[10px] font-semibold text-red-600 mt-1 pl-1 tracking-wider">
-                                {errors?.confirmPassword?.message}
-                            </span>
-                        )}
-                    </div>
+                  
+                    
                     <div className="flex justify-center">
                         <button type="submit" disabled={isLoading}>
-                            {isLoading ? "Loading..." : "Reset Password"}
+                            {isLoading ? "Loading..." : "Update"}
                         </button>
                     </div>
                 </form>
-                
+                <div className="">
+                    <p className="text-center text-[10px] font-semibold opacity-9 mt-3">
+                         Back to 
+                        <Link className="ml-1 link" to="/login">
+                            login
+                        </Link>
+                    </p>
+                </div>
             </div>
         </Wrapper>
     );
@@ -172,12 +142,12 @@ const Wrapper = styled.div`
         margin-top: 20px;
         text-align: center;
         text-transform: capitalize;
-        font-size: calc(1rem + 0.3vw);
+        font-size: calc(1rem + 0.5vw);
         font-weight: 600;
         color: var(--color-primary);
     }
     form {
-        margin-top: calc(0.8rem + 0.7vw);
+        margin-top: calc(1rem + 0.9vw);
     }
 
     .row {
@@ -212,10 +182,15 @@ const Wrapper = styled.div`
         color: var(--color-black);
         opacity: 0.7;
     }
-
+    .row a{
+        color: crimson;
+        font-size: 12px;
+        text-decoration: underline;
+        
+    }
     button {
-       
-        min-width: 100px;
+        width: 50%;
+        min-width: 90px;
         padding: 8px;
         font-size: 16px;
         letter-spacing: 1px;
@@ -224,7 +199,7 @@ const Wrapper = styled.div`
         border: none;
         border-radius: 6px;
         cursor: pointer;
-        margin: 15px auto 0;
+        margin: 1px auto 0;
         transition: background 0.2s ease-out;
     }
 
@@ -246,6 +221,13 @@ const Wrapper = styled.div`
         form {
             padding: 0 20px;
         }
+    }
+    p .link {
+        text-transform: capitalize;
+        color: var(--color-primary);
+    }
+    p .link:hover {
+        text-decoration: underline;
     }
     &.dark {
         background-color: #1f2937;

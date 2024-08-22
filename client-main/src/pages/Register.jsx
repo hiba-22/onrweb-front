@@ -7,8 +7,9 @@ import useTheme from "../context/Theme";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useTranslation } from "react-i18next";
 const Register = () => {
+    const { t } = useTranslation(["auth"]);
     const { themeMode } = useTheme();
     const {
         register,
@@ -41,7 +42,7 @@ const Register = () => {
             // posting
             try {
                 const response = await axios.post(
-                    "https://onr-backend.vercel.app/api/v1/auth/register",
+                    "http://localhost:3000/api/v1/auth/register",
                     user
                 );
                     console.log(response);
@@ -80,38 +81,38 @@ const Register = () => {
                 <div className="flex justify-center">
                     {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
-                <h1>Create Account</h1>
+                <h1>{t("create_Account")}</h1>
                 {!isPasswordMatched?.status && (
                     <p className="text-[11px] font-semibold text-center text-red-700 bg-red-100 px-1 py-2 mt-4 tracking-wider">
-                        both password not matched
+                        {t("not_matched")}
                     </p>
                 )}
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                     <div className="row">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">{t("labelUsername")}</label>
                         <input
                             type="text"
                             name="username"
                             autoComplete="off"
-                            placeholder="Type Here"
+                            placeholder={t("placeholder")}
                             {...register("username", {
                                 required: {
                                     value: true,
-                                    message: "Username is required",
+                                    message: t("errorName"),
                                 },
                                 maxLength: {
                                     value: 30,
-                                    message: "Username is too long(max 30char)",
+                                    message: t("maxLengthName"),
                                 },
                                 minLength: {
                                     value: 3,
                                     message:
-                                        "Username is too short (min 3char)",
+                                        t("minLengthName"),
                                 },
                                 pattern: {
                                     value: /^[A-Za-z][A-Za-z0-9_]*$/,
-                                    message:
-                                        "Username can't start with number and special characters",
+                                    message:t("patternName"),
+                                       
                                 },
                             })}
                         />
@@ -122,19 +123,19 @@ const Register = () => {
                         )}
                     </div>
                     <div className="row">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">{t("labelEmail")}</label>
                         <input
                             type="email"
                             name="email"
-                            placeholder="Email@example.com"
+                            placeholder={t("EmailV")}
                             {...register("email", {
                                 required: {
                                     value: true,
-                                    message: "A valid email is required",
+                                    message: t("errorEmail"),
                                 },
                                 pattern: {
                                     value: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
-                                    message: "Enter a valid email",
+                                    message:  t("patternEmail"),
                                 },
                             })}
                         />
@@ -145,29 +146,29 @@ const Register = () => {
                         )}
                     </div>
                     <div className="row">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{t("labelPassword")}</label>
                         <input
                             type="password"
                             name="password"
-                            placeholder="Type Here"
+                            placeholder={t("placeholder")}
                             {...register("password", {
                                 required: {
                                     value: true,
-                                    message: "Password is required",
+                                    message: t("errorPwd"),
                                 },
                                 maxLength: {
                                     value: 20,
-                                    message: "Password is too long(max 20char)",
+                                    message: t("maxLengthPassword"),
                                 },
                                 minLength: {
                                     value: 8,
                                     message:
-                                        "Password is too short (min 8char)",
+                                    t("minLengthPassword") ,
                                 },
                                 pattern: {
                                     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])/,
                                     message:
-                                        "At least one uppercase,one special char and one number",
+                                    t("patternPassword"),
                                 },
                             })}
                         />
@@ -178,15 +179,15 @@ const Register = () => {
                         )}
                     </div>
                     <div className="row">
-                        <label htmlFor="password">Confirm Password</label>
+                        <label htmlFor="password">{t("Confirm_Password")}</label>
                         <input
                             type="password"
                             name="password"
-                            placeholder="Type Here"
+                            placeholder={t("placeholder")}
                             {...register("confirmPassword", {
                                 required: {
                                     value: true,
-                                    message: "Password is required",
+                                    message: t("errorPwd"),
                                 },
                             })}
                         />
@@ -198,15 +199,15 @@ const Register = () => {
                     </div>
                     <div className="flex justify-center">
                         <button type="submit" disabled={isLoading}>
-                            {isLoading ? "Loading..." : "Register"}
+                            {isLoading ? "Loading..." : t("Register")}
                         </button>
                     </div>
                 </form>
                 <div className="">
                     <p className="text-center text-[10px] font-semibold opacity-9 mt-3">
-                        Already have an account.
+                            {t("Alredy")}
                         <Link className="ml-1 link" to="/login">
-                            Login now
+                            {t("Login_now")}
                         </Link>
                     </p>
                 </div>

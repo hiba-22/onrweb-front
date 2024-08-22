@@ -11,7 +11,9 @@ import { postHandler } from "../../utils/FetchHandlers";
 import { Link } from "react-router-dom";
 import ApplyFormModal from "./ApplyFormModal"; // Assuming correct path
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 const JobCard = ({ job }) => {
+  const { t } = useTranslation(["common","offer"]);
   const { themeMode } = useTheme();
   const date = dayjs(job?.jobDeadline).format("MMM Do, YYYY");
   const { user } = useUserContext();
@@ -31,7 +33,7 @@ const JobCard = ({ job }) => {
       };
       try {
         const response = await postHandler({
-          url: "https://onr-backend.vercel.app/api/v1/application/apply",
+          url: "http://localhost:3000/api/v1/application/apply",
           body: appliedJob,
         });
         Swal.fire({
@@ -71,7 +73,7 @@ const JobCard = ({ job }) => {
       appliedJob.append("resume", formData.get("resume"));
 
       const response = await postHandler({
-        url: "https://onr-backend.vercel.app/api/v1/ApplicationGeust/applyGeust",
+        url: "http://localhost:3000/api/v1/ApplicationGeust/applyGeust",
         body: appliedJob,
         isFormData: true, // Pass this to indicate form data
       });
@@ -86,7 +88,7 @@ const JobCard = ({ job }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "An error occurred while applying for this job.",
+        text: error?.response?.data,
       });
     }
   };
@@ -130,17 +132,17 @@ const JobCard = ({ job }) => {
         <div className="end-row">
         
           <Link to={`/job/${job._id}`} className="detail-btn">
-            details
+          {t("common:details")}
           </Link>
        
           {!isAdminOrRecruiter() && (
             <button className="apply-btn" onClick={handleApply}>
-              Apply
+              {t("offer:apply")}
             </button>
           )}
           {user?._id === job?.createdBy && (
             <Link to={`/dashboard/edit-job/${job._id}`} className="detail-btn">
-              edit
+              {t("common:edit")}
             </Link>
           )}
         </div>

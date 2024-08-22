@@ -8,9 +8,10 @@ import useTheme from "../context/Theme";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useTranslation } from "react-i18next";
 
 const ForgetPassword = () => {
+    const { t } = useTranslation(["auth"]);
     const { themeMode } = useTheme();
     const {
         register,
@@ -31,7 +32,7 @@ const ForgetPassword = () => {
         // posting
         try {
             const response = await axios.post(
-                "https://onr-backend.vercel.app/api/v1/auth/forgot",
+                "http://localhost:3000/api/v1/auth/forgot",
                 data,
                 {
                     withCredentials: true,
@@ -45,7 +46,7 @@ const ForgetPassword = () => {
             
 
             //reset();
-         navigate("/reset");
+         navigate("/login");
             // navigate("/dashboard");
         } catch (error) {
             Swal.fire({
@@ -64,18 +65,18 @@ const ForgetPassword = () => {
                 <div className="flex justify-center">
                     {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
-                <h1>Forget Password</h1>
+                <h1>{t("Forget_Password")}</h1>
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                     <div className="row">
-                        <label htmlFor="email">Enter your email address</label>
+                        <label htmlFor="email">{t("address")}</label>
                         <input
                             type="email"
                             name="email"
-                            placeholder="Email@example.com"
+                            placeholder={t("EmailV")}
                             {...register("email", {
                                 required: {
                                     value: true,
-                                    message: "A valid email is required",
+                                    message: t("valid_email"),
                                 },
                             })}
                         />
@@ -89,14 +90,15 @@ const ForgetPassword = () => {
                     
                     <div className="flex justify-center">
                         <button type="submit" disabled={isLoading}>
-                            {isLoading ? "Loading..." : "Continue"}
+                            {isLoading ? "Loading..." : t("Continue")}
                         </button>
                     </div>
                 </form>
                 <div className="">
                     <p className="text-center text-[10px] font-semibold opacity-9 mt-3">
+                            {t("Back")}
                         <Link className="ml-1 link" to="/login">
-                            Back to login
+                            {t("Login")}
                         </Link>
                     </p>
                 </div>
@@ -206,6 +208,13 @@ const Wrapper = styled.div`
         form {
             padding: 0 20px;
         }
+    }
+    p .link {
+        text-transform: capitalize;
+        color: var(--color-primary);
+    }
+    p .link:hover {
+        text-decoration: underline;
     }
     &.dark {
         background-color: #1f2937;

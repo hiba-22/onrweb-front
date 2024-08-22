@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { CiSearch } from "react-icons/ci";
 import { useJobContext } from "../../context/JobContext";
 const Landing = () => {
+    const { t } = useTranslation(["offer"]);
     const { handleJobFetch } = useJobContext();
     const [searchQuery, setSearchQuery] = useState("");
     useEffect(() => {
         const baseUrl =
-            "https://onr-backend.vercel.app/api/v1/jobs?page=1&limit=6";
+            "http://localhost:3000/api/v1/jobs?page=1&limit=6";
         let url = baseUrl;
         const queryParams = {};
 
@@ -31,11 +32,11 @@ const Landing = () => {
             <Wrapper>
                 <div className="hero-content">
                     <div className="text-content">
-                        <h1> Find your  <span className="fancy">new job </span> 
-                            today 
+                        <h1> {t('head')}  <span className="fancy">{t('head-1')}  </span> 
+                        {t('head-2')}  
                         </h1>
                         <p>
-                            Thousands of jobs in the computer ,engineering and technology sectors are waiting for you.
+                        {t('head-3')}  
                         </p>
                     </div>
                   

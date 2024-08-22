@@ -11,9 +11,10 @@ import Swal from "sweetalert2";
 import { useUserContext } from "../context/UserContext";
 import {GoogleLogin} from "react-google-login";
 import { gapi } from 'gapi-script'
-
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+    const { t } = useTranslation(["auth"]);
     const { themeMode } = useTheme();
     const { handleFetchMe } = useUserContext();
     const {
@@ -35,7 +36,7 @@ const Login = () => {
         // posting
         try {
             const response = await axios.post(
-                "https://onr-backend.vercel.app/api/v1/auth/login",
+                "http://localhost:3000/api/v1/auth/login",
                 data,
                 {
                     withCredentials: true,
@@ -69,7 +70,7 @@ const Login = () => {
     const responseGoogle = async (data) => {
         
         try {
-           const res = await axios.post("https://onr-backend.vercel.app/api/v1/auth/google_login", {tokenId: data.tokenId})
+           const res = await axios.post("http://localhost:3000/api/v1/auth/google_login", {tokenId: data.tokenId})
            Swal.fire({
             icon: "success",
             title: "Hurray...",
@@ -104,18 +105,18 @@ const Login = () => {
                 <div className="flex justify-center">
                     {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
                 </div>
-                <h1>Login</h1>
+                <h1>{t("Login")}</h1>
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                     <div className="row">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">{t("labelEmail")}</label>
                         <input
                             type="email"
                             name="email"
-                            placeholder="Email@example.com"
+                            placeholder={t("EmailV")}
                             {...register("email", {
                                 required: {
                                     value: true,
-                                    message: "A valid email is required",
+                                    message: t("errorEmail")
                                 },
                             })}
                         />
@@ -126,15 +127,15 @@ const Login = () => {
                         )}
                     </div>
                     <div className="row">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{t("labelPassword")}</label>
                         <input
                             type="password"
                             name="password"
-                            placeholder="Type Here"
+                            placeholder={t("placeholder")}
                             {...register("password", {
                                 required: {
                                     value: true,
-                                    message: "Password is required",
+                                    message: t("errorPwd"),
                                 },
                             })}
                         />
@@ -145,20 +146,20 @@ const Login = () => {
                         )}
                     </div>
                     <div className="row">
-                        <Link to="/forgot_password">Forgot your password?</Link>
+                        <Link to="/forgot_password">{t("Forgot")}</Link>
                     </div>
                     <div className="flex justify-center">
                         <button type="submit" disabled={isLoading}>
-                            {isLoading ? "Loading..." : "Login"}
+                            {isLoading ? "Loading..." : t("LoginB")}
                         </button>
                     </div>
                 </form>
-                <div className="hr">Or Login With</div>
+                <div className="hr">{t("Or")} </div>
 
                 <div className="flex justify-center">
                     <GoogleLogin
                             clientId={clientId}
-                            buttonText="Google"
+                            buttonText={t("GoogleB")} 
                             onSuccess={responseGoogle}
                             cookiePolicy={'single_host_origin'}
                     />
@@ -166,9 +167,9 @@ const Login = () => {
                 </div>
                 <div className="">
                     <p className="text-center text-[10px] font-semibold opacity-9 mt-3">
-                        Don't have an account.
+                        {t("no")} 
                         <Link className="ml-1 link" to="/register">
-                            Create account
+                            {t("Create_account")}
                         </Link>
                     </p>
                 </div>

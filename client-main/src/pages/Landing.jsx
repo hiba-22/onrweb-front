@@ -8,8 +8,10 @@ import HowWorks from "../components/Home Page/HowWorks";
 import Brands from "../components/Home Page/Brands";
 import Testimonial from "../components/Home Page/Testimonial";
 import useTheme from "../context/Theme";
+import { useTranslation } from "react-i18next";
 
 const Landing = () => {
+    const {t} = useTranslation(["home"]);
     const { themeMode } = useTheme();
     const navbarRef = useRef(null);
     const heroRef = useRef(null);
@@ -24,22 +26,22 @@ const Landing = () => {
             <Wrapper ref={heroRef}  className={themeMode === 'dark' ? 'dark' : '' }>
                 <div className="hero-content">
                     <div className="text-content">
-                        <h1> We Make   <span className="fancy">Creativity Work </span> 
-                            For Your Brand!
+                        <h1> {t("home")}   <span className="fancy">{t("h1")} </span> 
+                            {t("h2")} !
                         </h1>
                         <p>
-                            Ours Is A Team Of Creatives That Is Brainstorming On Great Ideas,
+                            {t("p1")}
                             <br></br>
-                            With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs.
+                            {t("p1-1")}
                         </p>
                         <p>
-                            We regularly recruit and integrate partners into our international ecosystem.
+                            {t("p2")}                        
                             <br></br>
-                            Free application: <strong><NavLink link="mailto:Contact@Onrtech.fr" label="Contact@Onrtech.Fr" /></strong>
+                            {t("free")} : <strong><NavLink link="mailto:Contact@Onrtech.fr" label="Contact@Onrtech.Fr" /></strong>
                         </p>
                         <div className="btn-grp">
                             <Link className="btn" to="/all-jobs">
-                                Apply Now
+                                {t("apply")}
                             </Link>
                         </div> 
                         

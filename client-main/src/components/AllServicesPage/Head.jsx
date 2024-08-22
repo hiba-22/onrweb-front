@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useServiceContext } from "../../context/ServiceContext";
+import { useTranslation } from "react-i18next";
 const Landing = () => {
+    const { t } = useTranslation(["service"]);
     const { handleServiceFetch } = useServiceContext();
     const [searchQuery, setSearchQuery] = useState("");
     useEffect(() => {
@@ -29,9 +31,9 @@ const Landing = () => {
             <Wrapper>
                 <div className="hero-content">
                     <div className="text-content">
-                    <h1> <span className="fancy">Our Services</span></h1>
+                    <h1> <span className="fancy">{t("head")}</span></h1>
                         <p>
-                        We Help You To Build High-Quality Digital Solutions And Products As Well As Deliver A Wide Range Of Related Professional Services. We Are Providing World-Class Service To Our Clients.
+                            {t("head-1")}
                         </p>
                     
                     </div>

@@ -3,7 +3,9 @@ import Logo from "../../src/components/Logo";
 import LogoLight from "../../src/components/Logo-ligth";
 import styled from "styled-components";
 import useTheme from "../context/Theme";
+import { useTranslation } from "react-i18next";
 const Footer = () => {
+  const {t} = useTranslation(["home"]);
   const { themeMode } = useTheme();
   return (
     <Wrapper className={themeMode === 'dark' ? 'dark' : '' }>
@@ -16,25 +18,25 @@ const Footer = () => {
                 {themeMode === 'dark' ? <LogoLight /> :  <Logo />} 
               </a>
               <p className="parg">
-                With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs.
+                  {t("footer")}
               </p>
             </div>
           </div>
 
-          <LinkGroup header="ABOUT US">
-            <NavLink link="/" label="Home" />
-            <NavLink link="/all-services" label="Services" />
-            <NavLink link="/all-jobs" label="Offers" />
-            <NavLink link="/all-articles" label="Articles" />
+          <LinkGroup header={t("about_US")}>
+            <NavLink link="/" label={t("homeF")} />
+            <NavLink link="/all-services" label={t("service")}  />
+            <NavLink link="/all-jobs" label={t("offer")}  />
+            <NavLink link="/all-articles" label={t("article")}  />
           </LinkGroup>
-          <LinkGroup header="USEFUL LINKS">
-            <NavLink link="/contact" label="Contact" />
-            <NavLink link="/dashboard" label="Dashboard" />
+          <LinkGroup header={t("useful_links")} >
+            <NavLink link="/contact" label={t("contactF")}  />
+            <NavLink link="/dashboard" label={t("dashboard")}  />
           </LinkGroup>
-
-          <LinkGroup header="Contact">
+          
+          <LinkGroup header={t("contact_Us")}>
             <p className="adress">
-              32, Rue De Perroquets 94350 Villiers Sur Marne, France
+                  {t("adress")}
             </p>
             <p className="flex items-center text-sm font-medium text-dark dark:text-white">
               <span className="mr-3 text-primary">
@@ -76,7 +78,7 @@ const Footer = () => {
           <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
             <div className="mb-10 w-full">
               <h4 className="mb-9 text-lg font-semibold text-dark dark:text-white">
-                Follow Us On
+                {t("Follow")}
               </h4>
               <div className="mb-6 flex items-center">
                 <a
@@ -144,21 +146,21 @@ const Footer = () => {
         <div className="border-t border-gray-200 dark:border-gray-600">
           <div className="py-6 flex flex-wrap items-center justify-between px-4 mx-auto max-w-6xl">
             <div className="text-base text-body-color dark:text-dark-6">
-              © {new Date().getFullYear()} Onrtech. All Rights Reserved.
+              © {new Date().getFullYear()} {t("copie")}
             </div>
             <div className="flex flex-wrap items-center">
               <a
                 href="/privacy-policy"
                 className="text-base font-medium text-gray-600 dark:text-dark-6 hover:text-gray-800 dark:hover:text-white"
               >
-                Privacy Policy
+                {t("Privacy")}
               </a>
               <span className="mx-3 text-gray-600 dark:text-dark-6">|</span>
               <a
                 href="/terms-conditions"
                 className="text-base font-medium text-gray-600 dark:text-dark-6 hover:text-gray-800 dark:hover:text-white"
               >
-                Terms & Conditions
+                {t("Terms")}
               </a>
             </div>
           </div>

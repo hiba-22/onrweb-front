@@ -6,7 +6,9 @@ import { useArticleContext } from "../../context/ArticleContext";
 import throttle from "lodash/throttle";
 import debounce from "lodash/debounce";
 import useTheme from "../../context/Theme";
+import { useTranslation } from "react-i18next";
 const SearchAndFilter = () => {
+    const { t } = useTranslation(["common","article"]);
     const { themeMode } = useTheme();
     const { handleArticleFetch } = useArticleContext();
     const [sortBy, setSortBy] = useState("");
@@ -33,7 +35,7 @@ const SearchAndFilter = () => {
     };
 
     useEffect(() => {
-        const baseUrl = "https://onr-backend.vercel.app/api/v1/articles?page=1&limit=6";
+        const baseUrl = "http://localhost:3000/api/v1/articles?page=1&limit=6";
         let url = baseUrl;
         const queryParams = {};
 
@@ -57,13 +59,13 @@ const SearchAndFilter = () => {
             <form action="" className="form">
                 <div className="filter">
                     <div className="status-row">
-                        <span className="text">Sort By</span>
+                        <span className="text">{t("article:search_Sort_By")}</span>
                         <select
                             className="status-select"
                             onChange={(e) => setSortBy(e.target.value)}
                             value={sortBy}
                         >
-                            <option value="">default</option>
+                            <option value="">{t("article:default")}</option>
                             {Article_Sort_By?.map((type, i) => (
                                 <option key={i + type} value={type}>
                                     {type}
@@ -74,7 +76,7 @@ const SearchAndFilter = () => {
                     <div className="search-row">
                         <input
                             type="text"
-                            placeholder="Type Article Title"
+                            placeholder={t("common:placeholder")}
                             onChange={handleSearchChange}
                             // Using value={searchQuery} might cause the throttle to trigger continuously,
                             // it's better to leave the input value uncontrolled.

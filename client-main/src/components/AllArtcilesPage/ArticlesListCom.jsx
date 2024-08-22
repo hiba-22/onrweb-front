@@ -5,7 +5,9 @@ import styled from "styled-components";
 import ArticleCard from "./ArticleCard";
 import { useUserContext } from "../../context/UserContext";
 import useTheme from "../../context/Theme"
+import { useTranslation } from "react-i18next";
 const ArticlesListCom = () => {
+  const { t } = useTranslation(["common","article"]);
   const { themeMode } = useTheme();
   const { articleLoading, articles } = useArticleContext();
   const { user } = useUserContext();
@@ -16,7 +18,7 @@ const ArticlesListCom = () => {
   if (!articles?.result?.length) {
     return (
       <h2 className="text-lg md:text-3xl text-center font-bold mt-24 text-red-600">
-        No Article Found
+        {t("Found")}
       </h2>
     );
   }
@@ -40,32 +42,32 @@ const ArticlesListCom = () => {
       <h5 className="Article-count">
         {user?.role === "recruiter" ? (
           <>
-            Shows{" "}
+             {t("common:shows")}{" "}
             <span className="fancy">
               {totalCount < 10 ? `0${totalCount}` : totalCount}
             </span>{" "}
-            of total
+            {t("common:total")}
             <span className="fancy">
               {totalCount < 10 ? `0${totalCount}` : totalCount}
             </span>{" "}
-            Articles
+            {t("article:Articles")}
           </>
           
         ) : (
           <>
-            Shows{" "}
+            {t("common:shows")}{" "}
             <span className="fancy">
               {totalPublishedArticles < 10
                 ? `0${totalPublishedArticles}`
                 : totalPublishedArticles}
             </span>{" "}
-            of total{" "}
+            {t("common:total")}{" "}
             <span className="fancy">
               {articles?.result?.length < 10
                 ? `0${articles?.result?.length}`
                 : articles?.result?.length}
             </span>{" "}
-            Articles Published
+            {t("article:Articles")}
           </>
         )}
       </h5>

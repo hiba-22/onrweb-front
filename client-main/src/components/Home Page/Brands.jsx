@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 
 export default function Brands() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,8 +24,11 @@ export default function Brands() {
     "https://onrtech.fr/images/solocal.png",
     "https://onrtech.fr/images/xlairways.png"
   ];
-
+  const {t} = useTranslation(["home"]);
+ 
+  
   useEffect(() => {
+   
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % (images.length - 1)); // Adjust to avoid overflow
     }, 3000); // Change image every 3 seconds
@@ -44,10 +48,10 @@ export default function Brands() {
     <div className="bg-white dark:bg-[#1f2937] ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <blockquote className="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9 dark:text-white ">
-          <p>Our Clients</p>
+          <p>{t("Our_Clients")}</p>
         </blockquote>
         <h2 className="text-center font-semibold leading-8 text-gray-900 dark:text-white">
-          “We Don't Just Build Softwares, We Build Your Business.”
+          “{t("clientP")}”
         </h2>
         <div className="relative mt-10 overflow-hidden max-w-lg mx-auto sm:max-w-xl lg:max-w-none">
           <div
