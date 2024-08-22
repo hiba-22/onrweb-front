@@ -11,7 +11,7 @@ import { ThemeProvider } from "./context/Theme";
 import { ThemeDashProvider } from "./context/ThemeDash";
 import "./i18n"
 import BackToTopButton from "../src/components/shared/BackToTopButton";
-import ChatBot from "../src/components/shared/ChatBot";
+
 axios.defaults.withCredentials = true;
 
 // Create a client
@@ -59,7 +59,7 @@ const Main = () => {
               <UserContext>
                 <RouterProvider router={router} ></RouterProvider>
                 <BackToTopButton />
-                <ChatBot/>
+                
                
               </UserContext>
               </ThemeDashProvider>
